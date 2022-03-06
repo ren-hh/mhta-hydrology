@@ -15,10 +15,12 @@ html, body {
 }
 
 .sidebar {
-  width: 400px;
+  width: 350px;
   height: 100%;
   padding: 15px;
   box-sizing: border-box;
+  /* background-color: black; */
+  opacity: 0.8;
 }
 
 .sidebar h3 {

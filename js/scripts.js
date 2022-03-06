@@ -101,6 +101,7 @@
       },
       paint: {
         'line-color': '#2733e8',
+        'line-width': 2
       }
     });
 
@@ -185,9 +186,10 @@
         link.textContent='500 year floodplain';
       }
       else{
-        link.textContent='Pre-development shoreline';
+        link.textContent='Pre-development shoreline (1609)';
       }
-      link.className = 'active';
+
+      link.className = 'none';
 
       // Show or hide layer when the toggle is clicked.
       link.onclick = function (e) {
