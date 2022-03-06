@@ -16,26 +16,24 @@
 
   <div class='container'>
      <div class='sidebar'>
-     <h3> Zerega Ave Municipal Fleet Electrification Potential</h3>
-     <p>In February 2020, Mayor de Blasio committed NYC to achieving an all-electric fleet by 2040. To achieve this, the city will need Con Edison's support in expanding and strenghtening the electrical infrastructure in key locations to effectively and safely serve these new loads.</p>
-     <p> Zerega Avenue in the Bronx is home to many of the municipal fleets that will be looking to go electric. The existing electrical infrastructure is not adequate to support the electrification, so significant upgrades will be required.</p>
-     <p>Click a marker to see the details of a particular fleet and the estimated additional electric load. The color of the marker represents the type of fleet. </p>
-     <p>The squares represent nearby substations. Click the substation to learn the voltage class and estimated remaining capacity for electric demand. </p>
+     <h3> Manhattan Hydrology  </h3>
+     <p>Before colonization and subsequent industrial development,  Manhattan had a rich and complex hydrology. Though most creeks and streams are no longer visible on the surface, many continue to course through subway tunnels, basements, and deep under streets and buildings.</p>
 
-     <button class= 'button-4' id='fly-to-parkchester' role = 'button'> Fly to Largest Nearby Substation </button>
+     <button class= 'button-4' id='fly-to-harlem' role = 'button'> Fly to Harlem </button>
 
-     <p> Data source: Con Edison / personal work  </p>
+     <p> Data source: NYC Open Data, Welikia.org  </p>
 
      </div>
      <div id='mapContainer'>
      <!-- this is where mapboxGL will insert the map -->
      </div>
 
-     <div class="map-overlay" id="legend">
+     <!-- <div class="map-overlay" id="legend"> -->
        <!-- This is where the legend space is created -->
        <!-- Tutorial used for legend: https://docs.mapbox.com/help/tutorials/choropleth-studio-gl-pt-2/#add-a-legend -->
-       <strong> Legend </strong>
-     </div>
+       <!-- <strong> Legend </strong>
+     </div> -->
+
    </div>
 
    <script src='https://api.mapbox.com/mapbox-gl-js/v2.1.1/mapbox-gl.js'></script>
@@ -45,8 +43,12 @@
    crossorigin="anonymous"></script>
    <script src="js/scripts.js"></script>
 
-<!-- Add a legend -->
+<!-- Add layer toggle -->
+
+<nav id="menu"></nav>
 
 
 </body>
+
+
 </html>
