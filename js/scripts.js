@@ -5,7 +5,7 @@
 
   var map = new mapboxgl.Map({
     container: 'mapContainer', // HTML container id
-    style: 'mapbox://styles/mapbox/satellite-v9', // style URL
+    style: 'mapbox://styles/mapbox/light-v9', // style URL
     center: mapCenter, // starting position as [lng, lat]
     zoom: 12,
     // minZoom: 9,
@@ -82,7 +82,7 @@
       },
       paint: {
         'fill-color': '#bfe8f4',
-        'fill-opacity': 0.3
+        'fill-opacity': 0.5
       }
     });
 
@@ -223,18 +223,18 @@
 
 
 
-// fly to Harlem
-$('#fly-to-harlem').on('click', function() {
-    // when this is clicked, let's fly the map to Midtown Manhattan
-    map.flyTo({
-      center: [
-        -73.94753262781356,
-        40.79221764547749,
-      ],
-      zoom: 13,
-    })
-
-  })
+// // fly to Harlem
+// $('#fly-to-harlem').on('click', function() {
+//     // when this is clicked, let's fly the map to Midtown Manhattan
+//     map.flyTo({
+//       center: [
+//         -73.94753262781356,
+//         40.79221764547749,
+//       ],
+//       zoom: 13,
+//     })
+//
+//   })
 
 
 //legend
