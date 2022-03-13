@@ -1,26 +1,33 @@
-#mapContainer {
-  backgroundColor: #ccc;
-  flex-grow: 1
-}
-
 html, body {
   margin: 0;
   height: 100%;
   font-family: sans-serif;
 }
 
-.container {
+#parent-container {
   display: flex;
+  flex-direction: column;
   height: 100%;
+  overflow: hidden;
+}
+
+
+.content-area {
+  display: flex;
+  flex-grow: 1;
+  min-height: 0;
 }
 
 .sidebar {
-  width: 350px;
+  width: 400px;
   height: 100%;
-  padding: 15px;
-  box-sizing: border-box;
-  /* background-color: black; */
-  opacity: 0.8;
+  padding: 25px 15px;
+  background-color: #313640;
+  color: #FFF;
+  text-align: left;
+  border-right: 1px solid #5e5e5e;
+  display: flex;
+  flex-direction: column;
 }
 
 .sidebar h3 {
@@ -28,6 +35,43 @@ html, body {
   text-align: center;
 }
 
+.sidebar h5 {
+  font-size: 20px;
+  text-align: center;
+}
+
+#mapContainer {
+  backgroundColor: #ccc;
+  flex-grow: 1
+}
+
+.reset {
+  margin-bottom: 25px;
+}
+
+.reset:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+/* style the "brand" or logo area */
+.navbar-brand {
+  /* font-family: 'Fredoka', sans-serif; */
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+/* override bootstrap styles for primary outline buttons */
+.btn-outline-primary {
+  color: #FFF;
+  border-color: #FFF;
+}
+
+.btn-outline-primary:hover {
+  color: #333;
+  background-color: #ccc;
+  border-color: #ccc;
+}
 /* button from https://getcssscan.com/css-buttons-examples */
 .button-4 {
   appearance: none;
@@ -116,6 +160,9 @@ html, body {
   margin-right: 5px;
 } */
 
+
+
+
 /* layer toggle area */
 /* https://docs.mapbox.com/mapbox-gl-js/example/toggle-layers/ */
 
@@ -124,7 +171,7 @@ html, body {
   opacity: 0.8;
   position: absolute;
   z-index: 1;
-  top: 10px;
+  top: 60px;
   right: 10px;
   border-radius: 3px;
   width: 150px;
