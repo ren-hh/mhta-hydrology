@@ -30,6 +30,16 @@ html, body {
   flex-direction: column;
 }
 
+.sidebar-top {
+  flex-grow: 1;
+  border-bottom: 1px solid #5e5e5e;
+}
+
+.sidebar-bottom {
+  padding-top: 15px;
+}
+
+
 .sidebar h3 {
   font-size: 30px;
   text-align: center;

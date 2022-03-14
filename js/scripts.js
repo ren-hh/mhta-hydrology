@@ -14,40 +14,6 @@
     // maxZoom: 14
   });
 
-// $.getJSON('data/zerega-fleet-locations.json', function(locations) {
-//   console.log(locations)
-//
-//   // now add markers for all fleet locations
-//   locations.forEach(function(location) {
-//     var popup = new mapboxgl.Popup({ offset: 40 })
-//       .setHTML(`
-//         <p> <strong> Address: </strong>${location.address} </p>
-//         <p> <strong> Site name: </strong>${location.name} </p>
-//         <p> <strong> Fleet Size: </strong> ${location.fleet_size} </p>
-//         <p> To electrify the <strong>${location.type}</strong> fleet parked at this location, there must be electrical infrastructure available to serve <strong>${location.estimated_demand_mva} MVA</strong> of additional demand.</p>
-//       `);
-//
-//     // default is purple for "multiple" fleet type
-//     var color = 'purple'
-//
-//     if (location.fleet_type === 'School Bus') {
-//       color = '#FFD800'
-//     }
-//
-//     if (location.fleet_type === 'Public Refuse Truck') {
-//       color = '#19601B'
-//     }
-//
-//     new mapboxgl.Marker({
-//       color: color
-//     })
-//       .setLngLat([location.gps_longitude, location.gps_latitude])
-//       .setPopup(popup)
-//       .addTo(map);
-//   })
-//
-//
-// })
 
 // load data and add layers
   map.on("load", function () {
@@ -203,7 +169,44 @@
       }
     });
 
-// create pop up for sewer and CSO
+
+//add markes layer
+    map.loadImage(
+      './images/mapbox-marker-icon-20px-gray.png',
+      // <i class="fa-solid fa-location-pin"></i>,
+
+
+      (error, image) => {
+        if (error) throw error;
+
+      // Add the image to the map style.
+        map.addImage('marker_im', image);
+
+        map.addSource('markers', {
+          type: 'geojson',
+          data: './data/markers.geojson'
+        });
+
+        map.addLayer({
+          id: 'markers',
+          type: 'symbol',
+          source: 'markers',
+          layout: {
+            'visibility': 'visible',
+            'icon-image': 'marker_im'
+          },
+          paint: {
+            // 'icon-size': 0.25
+            // 'circle-radius': 6
+          }
+
+        });
+      }
+    )
+
+});
+
+// create pop up when hovering over  sewer,  CSO, streams, markers
     map.on('mouseenter', 'sewer', function(e) {
       map.getCanvas().style.cursor = 'pointer';
 
@@ -263,6 +266,24 @@
             .addTo(map);
     });
 
+    map.on('mouseenter', 'markers', function(e) {
+
+      map.getCanvas().style.cursor = 'pointer';
+
+      var coordinates = e.lngLat;
+      var name = e.features[0].properties.name;
+
+      var popupText=`
+        <p> <strong> ${name} </strong></p>
+      `;
+
+      popup = new mapboxgl.Popup({ offset: 10 });
+
+      popup.setLngLat(coordinates)
+            .setHTML(popupText)
+            .addTo(map);
+
+    });
 
     // Change it back to a pointer when it leaves.
       map.on('mouseleave', 'sewer', function(e) {
@@ -284,7 +305,48 @@
         popup.remove();
       });
 
+    // Change it back to a pointer when it leaves.
+      map.on('mouseleave', 'markers', function(e) {
+        map.getCanvas().style.cursor = '';
+        popup.remove();
+      });
 
+
+
+
+//when marker is clicked, have navbar text Change
+
+map.on('click', 'markers', function(e) {
+  const coordinates = e.lngLat;
+  const name = e.features[0].properties.name;
+  const desc = e.features[0].properties.description;
+  const photo = e.features[0].properties.image;
+  const link = e.features[0].properties.link;
+
+  $(".sidebar-top").html(
+ ` <div class="card text-whote bg-dark mb-3">
+    <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
+        <img src= "${photo}" class="img-fluid"/>
+        <a href="#!">
+       <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+      </a>
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">${name}</h5>
+      <p class="card-text">${desc}</p>
+      <p class="card-text"> ${link} </p>
+    </div>
+ </div>
+
+ `
+ //<a href="#!" class="reset btn btn-primary">Back to City View</a>
+
+  )
+
+  map.flyTo({
+    center: coordinates,
+    zoom: 15
+  })
 
 });
 
@@ -377,7 +439,7 @@ $('.flyto').on('click', function() {
     newCenter = [-74.009485,40.707873]
   }
 
-  if ($(this).hasClass('flyto-washington-heights')) {
+  if ($(this).hasClass('flyto-gowanus')) {
     newCenter = [-73.941626,40.840029]
   }
 
@@ -385,7 +447,17 @@ $('.flyto').on('click', function() {
     center: newCenter,
     zoom: 13
   })
-})
+
+  // var eventValue = function (event) {
+  //    document.body.appendChild(document.createElement('div'))
+  //    .textContent = event.type;
+  // }
+  // var pressed = document.querySelector(".flyto");
+  // pressed.addEventListener("click", eventValue);
+
+});
+
+
 
 // listen for click on the 'Back to City View' button
 $('.reset').on('click', function() {
@@ -393,6 +465,26 @@ $('.reset').on('click', function() {
     center: mapCenter,
     zoom: 12
   });
+
+console.log('hellloooo')
+
+  $('.sidebar-top').html(  `
+
+    <h3> NYC Water Stories </h3>
+    <p>The map shows streams that criscrossed Manhattan in the year 1609 along with the shoreline at the time.  Though most creeks and streams are no longer visible on the surface, many continue to course through subway tunnels, basements, and deep under streets and buildings.</p>
+    <p> Toggle the layers for the 100 year and 500 year flood maps developed by FEMA to see how much the original geography of the island impacts where flood hazards are expected today. </p>
+
+    <h5>Jump to a Story</h5>
+       <div class="btn-group-vertical" role="group" aria-label="Vertical button group">
+        <button type="button" class="btn btn-outline-primary flyto flyto-tibbetts">Tibbetts Brook</button>
+        <button type="button" class="btn btn-outline-primary flyto flyto-gowanus">Gowanus Canal</button>
+        <button type="button" class="btn btn-outline-primary flyto flyto-minetta">Minetta Creek</button>
+        <button type="button" class="btn btn-outline-primary flyto flyto-eastside">East River Park</button>
+        <button type="button" class="btn btn-outline-primary flyto flyto-newtown">Newtown Creek</button>
+      </div>
+  `
+);
+
 
   map.setLayoutProperty(
     'CSOs',
@@ -405,22 +497,10 @@ $('.reset').on('click', function() {
     'visibility',
     'none'
   );
-})
+});
 
-$('.collapse').collapse()
+// $('.collapse').collapse()
 
-// // fly to Harlem
-// $('#fly-to-harlem').on('click', function() {
-//     // when this is clicked, let's fly the map to Midtown Manhattan
-//     map.flyTo({
-//       center: [
-//         -73.94753262781356,
-//         40.79221764547749,
-//       ],
-//       zoom: 13,
-//     })
-//
-//   })
 
 
 //legend

@@ -1,0 +1,21 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Broad Street",
+        "image": "./images/broad_street.png",
+        "link": "<a href= 'https://nypost.com/2016/03/13/finding-the-hidden-ponds-and-streams-of-manhattan/'' target='_blank' rel='noopener noreferrer'> Click here to learn more </a>",
+        "description":"An illustration of Broad Street, New York City in the 17th Century"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -74.01158809661864,
+          40.703944342093955
+        ]
+      }
+    }
+  ]
+}
