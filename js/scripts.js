@@ -9,7 +9,7 @@
     style: 'mapbox://styles/mapbox/light-v9', // style URL
     center: mapCenter, // starting position as [lng, lat]
     maxBounds: nycBounds,
-    zoom: 12,
+    zoom: 13,
     // minZoom: 9,
     // maxZoom: 14
   });
@@ -310,6 +310,8 @@
         map.getCanvas().style.cursor = '';
         popup.remove();
       });
+
+
 
 
 

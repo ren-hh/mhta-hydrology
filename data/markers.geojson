@@ -16,6 +16,59 @@
           40.703944342093955
         ]
       }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Collect Pond",
+        "image": "./images/collect_pond.png",
+        "link": "<a href= 'https://nypost.com/2016/03/13/finding-the-hidden-ponds-and-streams-of-manhattan/'' target='_blank' rel='noopener noreferrer'> Click here to learn more </a>",
+        "description":"The best-documented hidden waterway in Lower Manhattan is Collect Pond, which supplied drinking water to colonial settlers in the 17th and 18th centuries. Its center and deepest point — 70 feet — was at the present-day intersection of Leonard and Centre streets. The pond occupied 48 acres in an outline that includes present-day Foley Square, Manhattan Criminal Court, the city Department of Health and the Manhattan Supreme Court. At Worth Street, a neck of land jutted into the pond, separating Little Collect from the larger section of the pond."
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -74.00156505144544,
+          40.71600369219256
+        ]
+      }
+
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Minetta Brook",
+        "image": "./images/minetta_brook.png",
+        "link": "<a href= 'https://blog.mcny.org/2013/09/03/what-lies-beneath-new-york-the-minetta-brook/' target='_blank' rel='noopener noreferrer'> Click here to learn more </a>",
+        "description":"Washington Square Park was once a swamp fed by a brook named Minetta Brook, also called Bestavaar's Kill by the Dutch. To this day, construction crews working in Minetta’s path have to be careful not to unearth it when digging. Many basements in the area have a tendency to flood after a particularly heavy rain. The NYU Law School Library fights a constant battle against Minetta’s underground spring. Located at the south‐west corner of Washington Square Park, there is a continuous flow of groundwater into its basement at an estimated rate of 2‐5 gallons per minute in dry weather, which is pumped into a nearby sewer.  Sink holes are also a common occurrence along 12th Street in the area where the two forks of Minetta converge."
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.99802574849991,
+          40.73111003089743
+        ]
+      }
+
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Maiden Lane",
+        "image": "./images/maiden_lane.png",
+        "link": "<a href= 'https://untappedcities.com/2012/11/21/history-of-streets-maiden-lane/' target='_blank' rel='noopener noreferrer'> Click here to learn more </a>",
+        "description":"Maiden Lane wasn’t always a lofty venue for commerce and art. One of the first major pathways in colonial New Amsterdam, it was originally named “Maagde Paatje,” Dutch for “Maiden Path”.  The WPA Guide to New York City described it as “a footpath used by lovers along a rippling brook;” while in all probability, lovers certainly did carouse along the creek, the pathway was also called “Maiden Lane” because of the popularity of the nearby brook among mothers and daughters as a place to do the family laundry on sunny days."
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -74.00806763556491,
+          40.70805575028931
+        ]
+      }
+
     }
+
+
   ]
 }
