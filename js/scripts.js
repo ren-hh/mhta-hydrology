@@ -274,7 +274,7 @@
       var name = e.features[0].properties.name;
 
       var popupText=`
-        <p> <strong> ${name} </strong></p>
+        <p> <h5> ${name} </h5></p>
       `;
 
       popup = new mapboxgl.Popup({ offset: 10 });
@@ -288,27 +288,36 @@
     // Change it back to a pointer when it leaves.
       map.on('mouseleave', 'sewer', function(e) {
         map.getCanvas().style.cursor = '';
-        popup.remove();
+        /** remove popups */
+      const popUps = document.getElementsByClassName('mapboxgl-popup');
+      if (popUps[0]) popUps[0].remove();
       });
 
 
     // Change it back to a pointer when it leaves.
       map.on('mouseleave', 'CSOs', function(e) {
         map.getCanvas().style.cursor = '';
-        popup.remove();
+        /** remove popups */
+      const popUps = document.getElementsByClassName('mapboxgl-popup');
+      if (popUps[0]) popUps[0].remove();
       });
 
 
     // Change it back to a pointer when it leaves.
       map.on('mouseleave', 'bx-streams', function(e) {
         map.getCanvas().style.cursor = '';
-        popup.remove();
+        /** remove popups */
+      const popUps = document.getElementsByClassName('mapboxgl-popup');
+      if (popUps[0]) popUps[0].remove();
       });
 
     // Change it back to a pointer when it leaves.
       map.on('mouseleave', 'markers', function(e) {
         map.getCanvas().style.cursor = '';
-        popup.remove();
+
+          /** remove popups */
+        const popUps = document.getElementsByClassName('mapboxgl-popup');
+        if (popUps[0]) popUps[0].remove();
       });
 
 
@@ -325,7 +334,9 @@ map.on('click', 'markers', function(e) {
   const photo = e.features[0].properties.image;
   const link = e.features[0].properties.link;
 
-  $(".sidebar-top").html(
+  $('#default-sidebar-content').hide();
+  $("#variable-sidebar-content").show();
+  $("#variable-sidebar-content").html(
  ` <div class="card text-whote bg-dark mb-3">
     <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
         <img src= "${photo}" class="img-fluid"/>
@@ -343,7 +354,7 @@ map.on('click', 'markers', function(e) {
  `
  //<a href="#!" class="reset btn btn-primary">Back to City View</a>
 
-  )
+);
 
   map.flyTo({
     center: coordinates,
@@ -421,8 +432,10 @@ map.on('click', 'markers', function(e) {
 
 // listen for clicks on the neighborhood flyto buttons
 $('.flyto').on('click', function() {
+
   if ($(this).hasClass('flyto-tibbetts')) {
     newCenter = [-73.9101635,40.8822333]
+
 
     map.setLayoutProperty(
       'CSOs',
@@ -468,25 +481,8 @@ $('.reset').on('click', function() {
     zoom: 12
   });
 
-console.log('hellloooo')
-
-  $('.sidebar-top').html(  `
-
-    <h3> NYC Water Stories </h3>
-    <p>The map shows streams that criscrossed Manhattan in the year 1609 along with the shoreline at the time.  Though most creeks and streams are no longer visible on the surface, many continue to course through subway tunnels, basements, and deep under streets and buildings.</p>
-    <p> Toggle the layers for the 100 year and 500 year flood maps developed by FEMA to see how much the original geography of the island impacts where flood hazards are expected today. </p>
-
-    <h5>Jump to a Story</h5>
-       <div class="btn-group-vertical" role="group" aria-label="Vertical button group">
-        <button type="button" class="btn btn-outline-primary flyto flyto-tibbetts">Tibbetts Brook</button>
-        <button type="button" class="btn btn-outline-primary flyto flyto-gowanus">Gowanus Canal</button>
-        <button type="button" class="btn btn-outline-primary flyto flyto-minetta">Minetta Creek</button>
-        <button type="button" class="btn btn-outline-primary flyto flyto-eastside">East River Park</button>
-        <button type="button" class="btn btn-outline-primary flyto flyto-newtown">Newtown Creek</button>
-      </div>
-  `
-);
-
+  $('#default-sidebar-content').show();
+  $("#variable-sidebar-content").hide();
 
   map.setLayoutProperty(
     'CSOs',

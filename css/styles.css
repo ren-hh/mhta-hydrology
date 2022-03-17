@@ -61,6 +61,10 @@ margin-bottom: 25px;
   text-align: center;
 }
 
+.btn-area {
+  text-align: center;
+}
+
 #mapContainer {
   backgroundColor: #ccc;
   flex-grow: 1
@@ -228,4 +232,37 @@ margin-bottom: 25px;
 
 #menu a.active:hover {
   background: #3074a4;
+}
+
+/* Marker tweaks */
+.mapboxgl-popup-close-button {
+  display: none;
+}
+
+.mapboxgl-popup-content {
+  font: 400 11px/14px 'Source Sans Pro', 'Helvetica Neue', sans-serif;
+  padding: 0;
+  width: 80px;
+}
+
+.mapboxgl-popup-content h5 {
+  background: #313640;
+  color: #fff;
+  margin: 0;
+  padding: 5px;
+  border-radius: 3px 3px 0 0;
+  font-weight: 700;
+  margin-top: -15px;
+}
+
+.mapboxgl-popup-content div {
+  padding: 10px;
+}
+
+.mapboxgl-popup-anchor-top > .mapboxgl-popup-content {
+  margin-top: 15px;
+}
+
+.mapboxgl-popup-anchor-top > .mapboxgl-popup-tip {
+  border-bottom-color: #313640;
 }
