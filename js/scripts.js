@@ -9,7 +9,7 @@
     style: 'mapbox://styles/mapbox/light-v9', // style URL
     center: mapCenter, // starting position as [lng, lat]
     maxBounds: nycBounds,
-    zoom: 13,
+    zoom: 12,
     // minZoom: 9,
     // maxZoom: 14
   });
@@ -17,6 +17,8 @@
 
 // load data and add layers
   map.on("load", function () {
+
+    $("#variable-sidebar-content").hide();
 
     map.addSource('500yr-floodplain', {
       type: 'geojson',
@@ -170,11 +172,10 @@
     });
 
 
-//add markes layer
+//add markers layer
     map.loadImage(
       './images/mapbox-marker-icon-20px-gray.png',
       // <i class="fa-solid fa-location-pin"></i>,
-
 
       (error, image) => {
         if (error) throw error;
@@ -204,164 +205,225 @@
       }
     )
 
-});
+  });
 
 // create pop up when hovering over  sewer,  CSO, streams, markers
-    map.on('mouseenter', 'sewer', function(e) {
-      map.getCanvas().style.cursor = 'pointer';
+  map.on('mouseenter', 'sewer', function(e) {
+    map.getCanvas().style.cursor = 'pointer';
 
-      const coordinates = e.lngLat;
+    const coordinates = e.lngLat;
+    var popupText=`
+      <p> <strong> Broadway sewer main </strong> (current path of Tibbetts Brook)</p>
+    `;
+
+    popup = new mapboxgl.Popup({ offset: 10 });
+
+    popup.setLngLat(coordinates)
+          .setHTML(popupText)
+          .addTo(map);
+
+  });
+
+  map.on('mouseenter', 'CSOs', function(e) {
+
+    map.getCanvas().style.cursor = 'pointer';
+
+    var coordinates = e.lngLat;
+    var id = e.features[0].properties.cso_identification_number;
+
+    var popupText=`
+      <p> This is CSO ${id}.</p>
+    `;
+
+    popup = new mapboxgl.Popup({ offset: 10 });
+
+    popup.setLngLat(coordinates)
+          .setHTML(popupText)
+          .addTo(map);
+
+  });
+
+  map.on('mouseenter', 'bx-streams', function(e) {
+
+    map.getCanvas().style.cursor = 'pointer';
+
+    const coordinates = e.lngLat;
+    const id = e.features[0].properties.stream_name;
+
+
+    if (id==="tibbetts"){
       var popupText=`
-        <p> <strong> Broadway sewer main </strong> (current path of Tibbetts Brook)</p>
+        <p> <strong> Tibbetts Brook </strong> (historical path)</p>
       `;
 
-      popup = new mapboxgl.Popup({ offset: 10 });
+    }  else{
+      var popupText=`NA`;
+    }
 
-      popup.setLngLat(coordinates)
-            .setHTML(popupText)
-            .addTo(map);
+    popup = new mapboxgl.Popup({ offset: 10 });
 
-    });
+    popup.setLngLat(coordinates)
+          .setHTML(popupText)
+          .addTo(map);
+  });
 
-    map.on('mouseenter', 'CSOs', function(e) {
+//create a popup function
+  function createPopUp(currentFeature) {
 
-      map.getCanvas().style.cursor = 'pointer';
+    const popUps = document.getElementsByClassName('mapboxgl-popup');
+/** Check if there is already a popup on the map and if so, remove it */
+    if (popUps[0]) popUps[0].remove();
 
-      var coordinates = e.lngLat;
-      var id = e.features[0].properties.cso_identification_number;
+    var name = currentFeature.features[0].properties.name;
 
-      var popupText=`
-        <p> This is CSO ${id}.</p>
-      `;
+    var popupText=`
+      <p> <h5> ${name} </h5></p>
+    `;
 
-      popup = new mapboxgl.Popup({ offset: 10 });
+    popup = new mapboxgl.Popup({ offset: 10 });
 
-      popup.setLngLat(coordinates)
-            .setHTML(popupText)
-            .addTo(map);
+    popup.setLngLat(currentFeature.lngLat)
+          .setHTML(popupText)
+          .addTo(map);
+    };
 
-    });
+//flyTo and cahnge Navbar text function
+  function flyToDisplayStory(currentFeature) {
 
-    map.on('mouseenter', 'bx-streams', function(e) {
+    const coordinates = currentFeature.lngLat;
+    const name = currentFeature.features[0].properties.name;
+    const desc = currentFeature.features[0].properties.description;
+    const photo = currentFeature.features[0].properties.image;
+    const link = currentFeature.features[0].properties.link;
 
-      map.getCanvas().style.cursor = 'pointer';
-
-      const coordinates = e.lngLat;
-      const id = e.features[0].properties.stream_name;
-
-
-      if (id==="tibbetts"){
-        var popupText=`
-          <p> <strong> Tibbetts Brook </strong> (historical path)</p>
-        `;
-
-      }  else{
-        var popupText=`NA`;
-      }
-
-      popup = new mapboxgl.Popup({ offset: 10 });
-
-      popup.setLngLat(coordinates)
-            .setHTML(popupText)
-            .addTo(map);
-    });
-
-    map.on('mouseenter', 'markers', function(e) {
-
-      map.getCanvas().style.cursor = 'pointer';
-
-      var coordinates = e.lngLat;
-      var name = e.features[0].properties.name;
-
-      var popupText=`
-        <p> <h5> ${name} </h5></p>
-      `;
-
-      popup = new mapboxgl.Popup({ offset: 10 });
-
-      popup.setLngLat(coordinates)
-            .setHTML(popupText)
-            .addTo(map);
-
-    });
-
-    // Change it back to a pointer when it leaves.
-      map.on('mouseleave', 'sewer', function(e) {
-        map.getCanvas().style.cursor = '';
-        /** remove popups */
-      const popUps = document.getElementsByClassName('mapboxgl-popup');
-      if (popUps[0]) popUps[0].remove();
-      });
-
-
-    // Change it back to a pointer when it leaves.
-      map.on('mouseleave', 'CSOs', function(e) {
-        map.getCanvas().style.cursor = '';
-        /** remove popups */
-      const popUps = document.getElementsByClassName('mapboxgl-popup');
-      if (popUps[0]) popUps[0].remove();
-      });
-
-
-    // Change it back to a pointer when it leaves.
-      map.on('mouseleave', 'bx-streams', function(e) {
-        map.getCanvas().style.cursor = '';
-        /** remove popups */
-      const popUps = document.getElementsByClassName('mapboxgl-popup');
-      if (popUps[0]) popUps[0].remove();
-      });
-
-    // Change it back to a pointer when it leaves.
-      map.on('mouseleave', 'markers', function(e) {
-        map.getCanvas().style.cursor = '';
-
-          /** remove popups */
-        const popUps = document.getElementsByClassName('mapboxgl-popup');
-        if (popUps[0]) popUps[0].remove();
-      });
-
-
-
-
-
-
-//when marker is clicked, have navbar text Change
-
-map.on('click', 'markers', function(e) {
-  const coordinates = e.lngLat;
-  const name = e.features[0].properties.name;
-  const desc = e.features[0].properties.description;
-  const photo = e.features[0].properties.image;
-  const link = e.features[0].properties.link;
-
-  $('#default-sidebar-content').hide();
-  $("#variable-sidebar-content").show();
-  $("#variable-sidebar-content").html(
- ` <div class="card text-whote bg-dark mb-3">
-    <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
-        <img src= "${photo}" class="img-fluid"/>
-        <a href="#!">
-       <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
-      </a>
-    </div>
-    <div class="card-body">
-      <h5 class="card-title">${name}</h5>
-      <p class="card-text">${desc}</p>
-      <p class="card-text"> ${link} </p>
-    </div>
- </div>
-
- `
- //<a href="#!" class="reset btn btn-primary">Back to City View</a>
-
-);
+    $('#default-sidebar-content').hide();
+    $("#variable-sidebar-content").show();
+  //   $("#variable-sidebar-content").html(
+  //  ` <div class="card text-whote bg-dark mb-3">
+  //     <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
+  //
+  //           <img src= "${photo}" class="img-fluid"/>
+  //         <a href="#!">
+  //        <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+  //         </a>
+  //     </div>
+  //     <div class="card-body">
+  //       <h5 class="card-title">${name}</h5>
+  //       <p class="card-text">${desc}</p>
+  //       <p class="card-text"> ${link} </p>
+  //     </div>
+  //  </div>
+  //
+  //  `
+  // );
 
   map.flyTo({
     center: coordinates,
     zoom: 15
-  })
+  });
 
-});
+
+  }
+
+//when marker is clicked, have navbar text Change and zoom to the location
+
+  map.on('click', 'markers', function(e) {
+
+    flyToDisplayStory(e)
+
+  });
+
+  // when marker is hovered on, display popup
+
+  map.on('mouseenter', 'markers', function(e) {
+
+    map.getCanvas().style.cursor = 'pointer';
+
+    createPopUp(e);
+    console.log(e.features[0]);
+
+  });
+
+  // listen for clicks on the flyto buttons
+  $('.flyto').on('click', function() {
+
+    if ($(this).hasClass('flyto-minetta')) {
+
+        feature = markers.getElementById('minetta');
+
+        console.log(feature);
+
+      flyToDisplayStory(feature);
+
+      // newCenter = [-73.9101635,40.8822333]
+
+
+
+
+      map.setLayoutProperty(
+        'CSOs',
+        'visibility',
+        'visible'
+      );
+
+      map.setLayoutProperty(
+        'sewer',
+        'visibility',
+        'visible'
+      );
+    }
+
+    if ($(this).hasClass('flyto-minetta')) {
+      newCenter = [-74.009485,40.707873]
+    }
+
+    if ($(this).hasClass('flyto-gowanus')) {
+      newCenter = [-73.941626,40.840029]
+    }
+
+    map.flyTo({
+      center: newCenter,
+      zoom: 13
+    })
+
+  });
+
+// Change it back to a pointer when it leaves.
+  map.on('mouseleave', 'sewer', function(e) {
+    map.getCanvas().style.cursor = '';
+    /** remove popups */
+  const popUps = document.getElementsByClassName('mapboxgl-popup');
+  if (popUps[0]) popUps[0].remove();
+  });
+
+
+// Change it back to a pointer when it leaves.
+  map.on('mouseleave', 'CSOs', function(e) {
+    map.getCanvas().style.cursor = '';
+    /** remove popups */
+  const popUps = document.getElementsByClassName('mapboxgl-popup');
+  if (popUps[0]) popUps[0].remove();
+  });
+
+
+// Change it back to a pointer when it leaves.
+  map.on('mouseleave', 'bx-streams', function(e) {
+    map.getCanvas().style.cursor = '';
+    /** remove popups */
+  const popUps = document.getElementsByClassName('mapboxgl-popup');
+  if (popUps[0]) popUps[0].remove();
+  });
+
+// Change it back to a pointer when it leaves.
+  map.on('mouseleave', 'markers', function(e) {
+    map.getCanvas().style.cursor = '';
+
+      /** remove popups */
+    const popUps = document.getElementsByClassName('mapboxgl-popup');
+    if (popUps[0]) popUps[0].remove();
+  });
+
+
 
 //toggle flood layers, source: https://docs.mapbox.com/mapbox-gl-js/example/toggle-layers/
  map.on("idle", function () {
@@ -427,49 +489,6 @@ map.on('click', 'markers', function(e) {
         const layers = document.getElementById('menu');
         layers.appendChild(link);
       }
-});
-
-
-// listen for clicks on the neighborhood flyto buttons
-$('.flyto').on('click', function() {
-
-  if ($(this).hasClass('flyto-tibbetts')) {
-    newCenter = [-73.9101635,40.8822333]
-
-
-    map.setLayoutProperty(
-      'CSOs',
-      'visibility',
-      'visible'
-    );
-
-    map.setLayoutProperty(
-      'sewer',
-      'visibility',
-      'visible'
-    );
-  }
-
-  if ($(this).hasClass('flyto-minetta')) {
-    newCenter = [-74.009485,40.707873]
-  }
-
-  if ($(this).hasClass('flyto-gowanus')) {
-    newCenter = [-73.941626,40.840029]
-  }
-
-  map.flyTo({
-    center: newCenter,
-    zoom: 13
-  })
-
-  // var eventValue = function (event) {
-  //    document.body.appendChild(document.createElement('div'))
-  //    .textContent = event.type;
-  // }
-  // var pressed = document.querySelector(".flyto");
-  // pressed.addEventListener("click", eventValue);
-
 });
 
 
