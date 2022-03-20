@@ -349,7 +349,7 @@
 
     if ($(this).hasClass('flyto-minetta')) {
 
-        feature = markers.getElementById('minetta');
+        feature = 'markers'.getElementById('minetta');
 
         console.log(feature);
 
