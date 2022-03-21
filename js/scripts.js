@@ -478,9 +478,6 @@
 
       // newCenter = [-73.9101635,40.8822333]
 
-
-
-
       map.setLayoutProperty(
         'CSOs',
         'visibility',
