@@ -95,33 +95,49 @@
         </div>
         <div id='variable-sidebar-content'>
           <div id='card-area'>
-            <div class="card text-whote bg-dark mb-3">
-               <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
+            <div class="card text-white bg-dark mb-3" style="background-color:#33485d;">
+               <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light" style="background-color:#33485d;">
 
                            <!-- Carousel wrapper -->
-                           <!--source: https://mdbootstrap.com/docs/standard/components/carousel/ -->
-                           <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+                           <!--source: https://getbootstrap.com/docs/5.1/components/carousel/ -->
+                           <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
                             <div class="carousel-indicators">
-                              <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                              <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                              <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                              <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                              <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                              <!-- <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button> -->
                             </div>
                             <div class="carousel-inner">
-                              <div class="carousel-item active">
-                                <img src= "./images/minetta_brook.png" class="img-fluid"/" class="d-block w-100" alt="...">
-                              </div>
+
+                                <div class="carousel-item active">
+                                  <div id="item1">
+                                    <img src= "..." class="d-block w-100" alt="...">
+
+                                  </div>
+                                  <div class="carousel-caption carousel-caption-padding-y d-none d-md-block">
+                                      <h5>Then</h5>
+                                  </div>
+                                </div>
+
                               <div class="carousel-item">
-                                <img src="..." class="d-block w-100" alt="...">
+                                <div id="item2">
+                                  <img src= "..." class="d-block w-100" alt="...">
+
+                                </div>
+                                <div class="carousel-caption carousel-caption-padding-y d-none d-md-block">
+                                    <h5>Now</h5>
+                                </div>
                               </div>
-                              <div class="carousel-item">
-                                <img src="..." class="d-block w-100" alt="...">
-                              </div>
+                              <!-- <div class="carousel-item">
+                                <div id="item3">
+                                  <img src= "..." class="d-block w-100" alt="...">
+                                </div> -->
+                              <!-- </div> -->
                             </div>
-                            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                            <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
                               <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                               <span class="visually-hidden">Previous</span>
                             </button>
-                            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                            <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
                               <span class="carousel-control-next-icon" aria-hidden="true"></span>
                               <span class="visually-hidden">Next</span>
                             </button>
@@ -133,7 +149,7 @@
                   <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
                    </a>
                </div>
-               <div class="card-body">
+               <div class="card-body" style="background-color:#33485d; padding-top: 5px; text-align: justify;">
                  <h5 class="card-title">${name}</h5>
                  <p class="card-text">${desc}</p>
                  <p class="card-text"> ${link} </p>

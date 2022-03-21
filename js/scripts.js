@@ -2,14 +2,14 @@
   mapboxgl.accessToken = 'pk.eyJ1IjoicmVuLWhlZ3lpIiwiYSI6ImNremhudTF1eTJjMW0yd2t1NTUzYjN4bmIifQ.IiIyBmQ93k7PgPh0rQrLEg'
 
   var nycBounds = [[-74.333496,40.469935], [-73.653717,40.932190]]
-  var mapCenter = [-73.991496372,   40.74636738]
+  var mapCenter = [-73.9567938, 40.8007976]
 
   var map = new mapboxgl.Map({
     container: 'mapContainer', // HTML container id
     style: 'mapbox://styles/mapbox/light-v9', // style URL
     center: mapCenter, // starting position as [lng, lat]
     maxBounds: nycBounds,
-    zoom: 12,
+    zoom: 11,
     // minZoom: 9,
     // maxZoom: 14
   });
@@ -17,8 +17,6 @@
 
 // load data and add layers
   map.on("load", function () {
-
-    $("#variable-sidebar-content").hide();
 
     map.addSource('500yr-floodplain', {
       type: 'geojson',
@@ -133,6 +131,25 @@
       }
     });
 
+    map.addSource('newtown_creek', {
+      type: 'geojson',
+      data: './data/newtown_creek.geojson'
+    });
+
+    map.addLayer({
+      id: 'newtown_creek',
+      type: 'line',
+      source: 'newtown_creek',
+      layout: {
+        'visibility': 'visible'
+      },
+      paint: {
+        'line-color': '#2733e8',
+        'line-width': 2
+      }
+    });
+
+
     map.addSource('broadway_sewer', {
       type: 'geojson',
       data: './data/broadway_sewer.geojson'
@@ -147,6 +164,25 @@
       },
       paint: {
         'line-color': '#af8a1b',
+        'line-width': 4
+
+      }
+    });
+
+    map.addSource('putnam_greenway', {
+      type: 'geojson',
+      data: './data/putnam_greenway.geojson'
+    });
+
+    map.addLayer({
+      id: 'putnam_greenway',
+      type: 'line',
+      source: 'putnam_greenway',
+      layout: {
+        'visibility': 'none'
+      },
+      paint: {
+        'line-color': '#578A20',
         'line-width': 4
 
       }
@@ -194,7 +230,8 @@
           source: 'markers',
           layout: {
             'visibility': 'visible',
-            'icon-image': 'marker_im'
+            'icon-image': 'marker_im',
+            'icon-allow-overlap': true
           },
           paint: {
             // 'icon-size': 0.25
@@ -213,7 +250,27 @@
 
     const coordinates = e.lngLat;
     var popupText=`
-      <p> <strong> Broadway sewer main </strong> (current path of Tibbetts Brook)</p>
+      <h6> Broadway sewer main </h6>
+      <br>
+      <p> Current path of Tibbetts Brook</p>
+    `;
+
+    popup = new mapboxgl.Popup({ offset: 10 });
+
+    popup.setLngLat(coordinates)
+          .setHTML(popupText)
+          .addTo(map);
+
+  });
+
+  map.on('mouseenter', 'putnam_greenway', function(e) {
+    map.getCanvas().style.cursor = 'pointer';
+
+    const coordinates = e.lngLat;
+    var popupText=`
+     <h6> Proposed greenway </h6>
+     <br>
+     <p> Proposed daylit path of Tibbetts Brook </p>
     `;
 
     popup = new mapboxgl.Popup({ offset: 10 });
@@ -231,9 +288,20 @@
     var coordinates = e.lngLat;
     var id = e.features[0].properties.cso_identification_number;
 
+    if (id==="NY0026131-056"){
+
+       var popupText=`
+       <h6> CSO Outfall #56 </h6>
+       <br>
+       <p> One of the city's largest sources of sewage discharge during storm events. </p>
+
+       `
+    } else {
+
     var popupText=`
       <p> This is CSO ${id}.</p>
     `;
+  }
 
     popup = new mapboxgl.Popup({ offset: 10 });
 
@@ -243,29 +311,29 @@
 
   });
 
-  map.on('mouseenter', 'bx-streams', function(e) {
-
-    map.getCanvas().style.cursor = 'pointer';
-
-    const coordinates = e.lngLat;
-    const id = e.features[0].properties.stream_name;
-
-
-    if (id==="tibbetts"){
-      var popupText=`
-        <p> <strong> Tibbetts Brook </strong> (historical path)</p>
-      `;
-
-    }  else{
-      var popupText=`NA`;
-    }
-
-    popup = new mapboxgl.Popup({ offset: 10 });
-
-    popup.setLngLat(coordinates)
-          .setHTML(popupText)
-          .addTo(map);
-  });
+  // map.on('mouseenter', 'bx-streams', function(e) {
+  //
+  //   map.getCanvas().style.cursor = 'pointer';
+  //
+  //   const coordinates = e.lngLat;
+  //   const id = e.features[0].properties.stream_name;
+  //
+  //
+  //   if (id==="tibbetts"){
+  //     var popupText=`
+  //       <p> <strong> Tibbetts Brook </strong> (historical path)</p>
+  //     `;
+  //
+  //   }  else{
+  //     var popupText=`NA`;
+  //   }
+  //
+  //   popup = new mapboxgl.Popup({ offset: 10 });
+  //
+  //   popup.setLngLat(coordinates)
+  //         .setHTML(popupText)
+  //         .addTo(map);
+  // });
 
 //create a popup function
   function createPopUp(currentFeature) {
@@ -293,29 +361,41 @@
     const coordinates = currentFeature.lngLat;
     const name = currentFeature.features[0].properties.name;
     const desc = currentFeature.features[0].properties.description;
-    const photo = currentFeature.features[0].properties.image;
+    const photo1 = currentFeature.features[0].properties.image1;
+    const photo2 = currentFeature.features[0].properties.image2;
     const link = currentFeature.features[0].properties.link;
 
     $('#default-sidebar-content').hide();
     $("#variable-sidebar-content").show();
-  //   $("#variable-sidebar-content").html(
-  //  ` <div class="card text-whote bg-dark mb-3">
-  //     <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
-  //
-  //           <img src= "${photo}" class="img-fluid"/>
-  //         <a href="#!">
-  //        <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
-  //         </a>
-  //     </div>
-  //     <div class="card-body">
-  //       <h5 class="card-title">${name}</h5>
-  //       <p class="card-text">${desc}</p>
-  //       <p class="card-text"> ${link} </p>
-  //     </div>
-  //  </div>
-  //
-  //  `
-  // );
+
+    $("#item1").html(
+
+      `
+        <img src= "${photo1}" class="d-block w-100" alt="...">
+
+      `
+    );
+
+    $("#item2").html(
+
+      `
+        <img src= "${photo2}" class="d-block w-100" alt="...">
+
+      `
+    );
+
+    $('.card-body').html(
+
+      `
+      <div class="card-body">
+        <h5 class="card-title">${name}</h5>
+        <p class="card-text">${desc}</p>
+        <p class="card-text"> ${link} </p>
+      </div>
+      `
+    );
+
+
 
   map.flyTo({
     center: coordinates,
@@ -323,13 +403,54 @@
   });
 
 
-  }
+};
 
 //when marker is clicked, have navbar text Change and zoom to the location
 
   map.on('click', 'markers', function(e) {
 
-    flyToDisplayStory(e)
+    flyToDisplayStory(e);
+
+    if(e.features[0].properties.id==='tibbetts'){
+
+      map.setLayoutProperty(
+        'CSOs',
+        'visibility',
+        'visible'
+      );
+
+      map.setLayoutProperty(
+        'sewer',
+        'visibility',
+        'visible'
+      );
+
+      map.setLayoutProperty(
+        'putnam_greenway',
+        'visibility',
+        'visible'
+      );
+
+      map.flyTo({
+        center: e.lngLat,
+        zoom: 13
+      });
+
+    } else if (e.features[0].properties.id==='newtown') {
+      map.setLayoutProperty(
+        'CSOs',
+        'visibility',
+        'visible'
+      );
+
+      map.flyTo({
+        center: e.lngLat,
+        zoom: 13
+      });
+
+    } else{
+      return;
+    };
 
   });
 
@@ -340,7 +461,7 @@
     map.getCanvas().style.cursor = 'pointer';
 
     createPopUp(e);
-    console.log(e.features[0]);
+
 
   });
 
@@ -405,14 +526,22 @@
   if (popUps[0]) popUps[0].remove();
   });
 
-
-// Change it back to a pointer when it leaves.
-  map.on('mouseleave', 'bx-streams', function(e) {
+  // Change it back to a pointer when it leaves.
+  map.on('mouseleave', 'putnam_greenway', function(e) {
     map.getCanvas().style.cursor = '';
     /** remove popups */
   const popUps = document.getElementsByClassName('mapboxgl-popup');
   if (popUps[0]) popUps[0].remove();
   });
+
+
+// Change it back to a pointer when it leaves.
+  // map.on('mouseleave', 'bx-streams', function(e) {
+  //   map.getCanvas().style.cursor = '';
+  //   /** remove popups */
+  // const popUps = document.getElementsByClassName('mapboxgl-popup');
+  // if (popUps[0]) popUps[0].remove();
+  // });
 
 // Change it back to a pointer when it leaves.
   map.on('mouseleave', 'markers', function(e) {
@@ -497,7 +626,7 @@
 $('.reset').on('click', function() {
   map.flyTo({
     center: mapCenter,
-    zoom: 12
+    zoom: 11
   });
 
   $('#default-sidebar-content').show();
@@ -514,9 +643,40 @@ $('.reset').on('click', function() {
     'visibility',
     'none'
   );
+
+  map.setLayoutProperty(
+    'putnam_greenway',
+    'visibility',
+    'none'
+  );
 });
 
-// $('.collapse').collapse()
+
+
+//when the documents loads
+
+$(document).ready(function () {
+
+//set carousel properties
+  $("#myCarousel").carousel({
+
+     interval: 4000,
+     pause: 'hover',
+     ride: true
+   });
+
+//hide card/carousel upon loading
+  $("#variable-sidebar-content").hide();
+});
+
+// var myCarousel = document.querySelector('#myCarousel')
+// var carousel = new bootstrap.Carousel(myCarousel, {
+//   interval: 2000,
+//   wrap: false,
+//   pause: true
+//
+// });
+
 
 
 

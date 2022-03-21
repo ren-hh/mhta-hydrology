@@ -6,9 +6,10 @@
       "properties": {
         "id": "broad",
         "name": "Broad Street",
-        "image": "./images/broad_street.png",
+        "image1": "./images/broad_street.png",
+        "image2": "./images/broad_street_now.png",
         "link": "<a href= 'https://nypost.com/2016/03/13/finding-the-hidden-ponds-and-streams-of-manhattan/'' target='_blank' rel='noopener noreferrer'> Click here to learn more </a>",
-        "description":"An illustration of Broad Street, New York City in the 17th Century"
+        "description":"Broad Street is situated atop a buried inlet of the East River. When the first Dutch settlers arrived in Lower Manhattan in 1625 they named the inlet Heere Gracht after a canal in Amsterdam. After the English took over the colony, they buried the canal in 1676. On today’s maps, the only physical reminder of the Heere Gracht is Bridge Street, a two-block road that intersects with Broad Street. Prior to 1676, the intersection was a bridge spanning the canal."
       },
       "geometry": {
         "type": "Point",
@@ -23,7 +24,8 @@
       "properties": {
         "id": "collect",
         "name": "Collect Pond",
-        "image": "./images/collect_pond.png",
+        "image1": "./images/collect_pond.png",
+        "image2": "http://3.bp.blogspot.com/_Kj9wHw1Hgf0/STUXSFT7PEI/AAAAAAAACFo/6at8GLNy9Y4/s400/collect+pond+park+2.jpg",
         "link": "<a href= 'https://nypost.com/2016/03/13/finding-the-hidden-ponds-and-streams-of-manhattan/'' target='_blank' rel='noopener noreferrer'> Click here to learn more </a>",
         "description":"The best-documented hidden waterway in Lower Manhattan is Collect Pond, which supplied drinking water to colonial settlers in the 17th and 18th centuries. Its center and deepest point — 70 feet — was at the present-day intersection of Leonard and Centre streets. The pond occupied 48 acres in an outline that includes present-day Foley Square, Manhattan Criminal Court, the city Department of Health and the Manhattan Supreme Court. At Worth Street, a neck of land jutted into the pond, separating Little Collect from the larger section of the pond."
       },
@@ -41,7 +43,8 @@
       "properties": {
         "id": "minetta",
         "name": "Minetta Brook",
-        "image": "./images/minetta_brook.png",
+        "image1": "./images/minetta_brook.png",
+        "image2": "https://www.theactivetimes.com/sites/default/files/story/2019/iStock-1162428342.jpg",
         "link": "<a href= 'https://blog.mcny.org/2013/09/03/what-lies-beneath-new-york-the-minetta-brook/' target='_blank' rel='noopener noreferrer'> Click here to learn more </a>",
         "description":"Washington Square Park was once a swamp fed by a brook named Minetta Brook, also called Bestavaar's Kill by the Dutch. To this day, construction crews working in Minetta’s path have to be careful not to unearth it when digging. Many basements in the area have a tendency to flood after a particularly heavy rain. The NYU Law School Library fights a constant battle against Minetta’s underground spring. Located at the south‐west corner of Washington Square Park, there is a continuous flow of groundwater into its basement at an estimated rate of 2‐5 gallons per minute in dry weather, which is pumped into a nearby sewer.  Sink holes are also a common occurrence along 12th Street in the area where the two forks of Minetta converge."
       },
@@ -59,7 +62,8 @@
       "properties": {
         "id": "maiden",
         "name": "Maiden Lane",
-        "image": "./images/maiden_lane.png",
+        "image1": "./images/maiden_lane.png",
+        "image2": "https://i.pinimg.com/originals/75/1c/2e/751c2ee1381d9929c5bcdf758345bbe1.jpg",
         "link": "<a href= 'https://untappedcities.com/2012/11/21/history-of-streets-maiden-lane/' target='_blank' rel='noopener noreferrer'> Click here to learn more </a>",
         "description":"Maiden Lane wasn’t always a lofty venue for commerce and art. One of the first major pathways in colonial New Amsterdam, it was originally named “Maagde Paatje,” Dutch for “Maiden Path”.  The WPA Guide to New York City described it as “a footpath used by lovers along a rippling brook;” while in all probability, lovers certainly did carouse along the creek, the pathway was also called “Maiden Lane” because of the popularity of the nearby brook among mothers and daughters as a place to do the family laundry on sunny days."
       },
@@ -68,6 +72,63 @@
         "coordinates": [
           -74.00806763556491,
           40.70805575028931
+        ]
+      }
+
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "montayne",
+        "name": "Montayne's Rivulet",
+        "image1": "https://watercourses.typepad.com/photos/uncategorized/2008/08/15/106thst_crop_abig_viele_2.jpg",
+        "image2": "https://live.staticflickr.com/3501/3237281069_30397969e0_b.jpg",
+        "link": "<a href= 'https://watercourses.typepad.com/watercourses/manhattan_north_of_96th_st/' target='_blank' rel='noopener noreferrer'> Click here to learn more </a>",
+        "description":"A very wide stream ran into the East River between 106th Street and 107th Street. One source came from the west side of Manhattan, where Columbia University's campus sits today.This brook was long known as Montanye's Rivulet, and, in the development of Central Park, was used to feed the Pool, the Loch, and Harlem Lake. Montanye's Rivulet apparently still exists and still feeds the Harlem Lake at least. "
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.95031125251799,
+          40.79606019580105
+        ]
+      }
+
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "tibbetts",
+        "name": "Tibbetts Brook",
+        "image1": "https://watercourses.typepad.com/watercourses/images/2008/08/15/kingsbridge1777_cropfortibbets.jpg",
+        "image2": "https://watercourses.typepad.com/photos/uncategorized/2008/08/15/tibbetsbrook032308_029_layereda_fla.jpg",
+        "link": "<a href= 'https://www.nytimes.com/2021/12/06/nyregion/tibbets-brook-bronx-daylighting.html' target='_blank' rel='noopener noreferrer'> Click here to learn more </a>",
+        "description":"Tibbetts Brook originates in Yonkers, flows through Van Cortlandt Park in the Bronx, and disappears into the sewer system at the southern edge of the park. The brook contributes about 2 billion gallons of water to the sewer system annually, significantly reducing the system’s capacity to process storm water during rain events. This leads to the discharge of about 400 million gallons of sewage into to the Harlem River, annually. The sewage is discharged at combined sewage overflow point CSO #56. A joint proposal of the NYC Dept. of Environmental Protection (DEP) and Dept. of Parks and Recreation (DPR) is to daylight the brook, meaning bring it back to the surface, and separate it from the sewer system. In addition to improving the water quality of the Harlem River, the project would alleviate flooding due to storms like Hurricane Ida, improve the ecological health of Van Cortlandt Park, and create a greenway for use by cyclists and pedestrians that would connect the upstate rail trails to the greenways of Manhattan. The proposed route would be along an abandoned rail right-of-way, about 60% of which is now owned by CSX rail company. The project enjoys widespread political support and is slated to begin in 2025, but the city must first acquire the CSX property for the project to go forward."
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.90187725120255,
+          40.885650601261084
+        ]
+      }
+
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "newtown",
+        "name": "Newtown Creek",
+        "image1": "",
+        "image2": "",
+        "link": "<a href= '' target='_blank' rel='noopener noreferrer'> Click here to learn more </a>",
+        "description":""
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.93463428093632,
+          40.72925247191888
         ]
       }
 
