@@ -15,6 +15,10 @@
   });
 
 
+//get markers geojson as a variable
+
+var locations= $.getJSON('data/markers.geojson', function(locations) {
+
 // load data and add layers
   map.on("load", function () {
 
@@ -208,7 +212,7 @@
     });
 
 
-//add markers layer
+// add markers layer
     map.loadImage(
       './images/mapbox-marker-icon-20px-gray.png',
       // <i class="fa-solid fa-location-pin"></i>,
@@ -221,8 +225,10 @@
 
         map.addSource('markers', {
           type: 'geojson',
-          data: './data/markers.geojson'
+          data: locations
         });
+
+        console.log(locations)
 
         map.addLayer({
           id: 'markers',
@@ -240,9 +246,11 @@
 
         });
       }
-    )
+    );
 
   });
+
+
 
 // create pop up when hovering over  sewer,  CSO, streams, markers
   map.on('mouseenter', 'sewer', function(e) {
@@ -311,29 +319,6 @@
 
   });
 
-  // map.on('mouseenter', 'bx-streams', function(e) {
-  //
-  //   map.getCanvas().style.cursor = 'pointer';
-  //
-  //   const coordinates = e.lngLat;
-  //   const id = e.features[0].properties.stream_name;
-  //
-  //
-  //   if (id==="tibbetts"){
-  //     var popupText=`
-  //       <p> <strong> Tibbetts Brook </strong> (historical path)</p>
-  //     `;
-  //
-  //   }  else{
-  //     var popupText=`NA`;
-  //   }
-  //
-  //   popup = new mapboxgl.Popup({ offset: 10 });
-  //
-  //   popup.setLngLat(coordinates)
-  //         .setHTML(popupText)
-  //         .addTo(map);
-  // });
 
 //create a popup function
   function createPopUp(currentFeature) {
@@ -356,14 +341,14 @@
     };
 
 //flyTo and cahnge Navbar text function
-  function flyToDisplayStory(currentFeature) {
+  function flyToDisplayStoryFromButton(currentFeature) {
 
-    const coordinates = currentFeature.lngLat;
-    const name = currentFeature.features[0].properties.name;
-    const desc = currentFeature.features[0].properties.description;
-    const photo1 = currentFeature.features[0].properties.image1;
-    const photo2 = currentFeature.features[0].properties.image2;
-    const link = currentFeature.features[0].properties.link;
+    const coordinates = currentFeature.geometry.coordinates;
+    const name = currentFeature.properties.name;
+    const desc = currentFeature.properties.description;
+    const photo1 = currentFeature.properties.image1;
+    const photo2 = currentFeature.properties.image2;
+    const link = currentFeature.properties.link;
 
     $('#default-sidebar-content').hide();
     $("#variable-sidebar-content").show();
@@ -405,11 +390,61 @@
 
 };
 
+
+function flyToDisplayStoryFromMarker(currentFeature) {
+
+  const coordinates = currentFeature.lngLat;
+  const name = currentFeature.features[0].properties.name;
+  const desc = currentFeature.features[0].properties.description;
+  const photo1 = currentFeature.features[0].properties.image1;
+  const photo2 = currentFeature.features[0].properties.image2;
+  const link = currentFeature.features[0].properties.link;
+
+  $('#default-sidebar-content').hide();
+  $("#variable-sidebar-content").show();
+
+  $("#item1").html(
+
+    `
+      <img src= "${photo1}" class="d-block w-100" alt="...">
+
+    `
+  );
+
+  $("#item2").html(
+
+    `
+      <img src= "${photo2}" class="d-block w-100" alt="...">
+
+    `
+  );
+
+  $('.card-body').html(
+
+    `
+    <div class="card-body">
+      <h5 class="card-title">${name}</h5>
+      <p class="card-text">${desc}</p>
+      <p class="card-text"> ${link} </p>
+    </div>
+    `
+  );
+
+
+
+map.flyTo({
+  center: coordinates,
+  zoom: 15
+});
+
+
+};
+
 //when marker is clicked, have navbar text Change and zoom to the location
 
   map.on('click', 'markers', function(e) {
 
-    flyToDisplayStory(e);
+    flyToDisplayStoryFromMarker(e);
 
     if(e.features[0].properties.id==='tibbetts'){
 
@@ -468,13 +503,25 @@
   // listen for clicks on the flyto buttons
   $('.flyto').on('click', function() {
 
+
     if ($(this).hasClass('flyto-minetta')) {
 
-        feature = 'markers'.getElementById('minetta');
 
-        console.log(feature);
+        currentFeature = locations.features.find(
+          function(feature) {
+            return feature.properties.id === 'minetta'
+          });
 
-      flyToDisplayStory(feature);
+        console.log(locations.features[0].geometry.coordinates);
+
+        console.log(currentFeature);
+        console.log(currentFeature[0]);
+
+        // var dummyFeatureCollection=[currentFeature];
+
+        // console.log(dummyFeatureCollection);
+
+      flyToDisplayStoryFromButton(currentFeature);
 
       // newCenter = [-73.9101635,40.8822333]
 
@@ -491,18 +538,15 @@
       );
     }
 
-    if ($(this).hasClass('flyto-minetta')) {
-      newCenter = [-74.009485,40.707873]
-    }
 
     if ($(this).hasClass('flyto-gowanus')) {
       newCenter = [-73.941626,40.840029]
     }
 
-    map.flyTo({
-      center: newCenter,
-      zoom: 13
-    })
+    // map.flyTo({
+    //   center: newCenter,
+    //   zoom: 13
+    // })
 
   });
 
@@ -531,14 +575,6 @@
   if (popUps[0]) popUps[0].remove();
   });
 
-
-// Change it back to a pointer when it leaves.
-  // map.on('mouseleave', 'bx-streams', function(e) {
-  //   map.getCanvas().style.cursor = '';
-  //   /** remove popups */
-  // const popUps = document.getElementsByClassName('mapboxgl-popup');
-  // if (popUps[0]) popUps[0].remove();
-  // });
 
 // Change it back to a pointer when it leaves.
   map.on('mouseleave', 'markers', function(e) {
@@ -710,3 +746,6 @@ $(document).ready(function () {
 //   item.appendChild(value);
 //   legend.appendChild(item);
 // });
+
+//end of getJSON
+});
