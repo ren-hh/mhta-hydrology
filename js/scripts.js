@@ -320,7 +320,7 @@ var locations= $.getJSON('data/markers.geojson', function(locations) {
   });
 
 
-//create a popup function
+//create a popup function for  hovering on markers
   function createPopUp(currentFeature) {
 
     const popUps = document.getElementsByClassName('mapboxgl-popup');
@@ -339,6 +339,26 @@ var locations= $.getJSON('data/markers.geojson', function(locations) {
           .setHTML(popupText)
           .addTo(map);
     };
+
+//create popup when hovering over button
+    function createPopUpButton(currentFeature) {
+
+      const popUps = document.getElementsByClassName('mapboxgl-popup');
+  /** Check if there is already a popup on the map and if so, remove it */
+      if (popUps[0]) popUps[0].remove();
+
+      var name = currentFeature.properties.name;
+
+      var popupText=`
+        <p> <h5> ${name} </h5></p>
+      `;
+
+      popup = new mapboxgl.Popup({ offset: 10 });
+
+      popup.setLngLat(currentFeature.geometry.coordinates)
+            .setHTML(popupText)
+            .addTo(map);
+      };
 
 //flyTo and cahnge Navbar text function
   function flyToDisplayStoryFromButton(currentFeature) {
@@ -373,11 +393,13 @@ var locations= $.getJSON('data/markers.geojson', function(locations) {
 
       `
       <div class="card-body">
-        <h5 class="card-title">${name}</h5>
+        <h5 class="card-title"> <a href= ${link} target='_blank' rel='noopener noreferrer'> ${name}</a> </h5>
+
         <p class="card-text">${desc}</p>
-        <p class="card-text"> ${link} </p>
+            <p class="card-title"> <a href= ${link} target='_blank' rel='noopener noreferrer'> Click here to learn more </a> </p>
       </div>
       `
+
     );
 
 
@@ -423,11 +445,14 @@ function flyToDisplayStoryFromMarker(currentFeature) {
 
     `
     <div class="card-body">
-      <h5 class="card-title">${name}</h5>
+      <h5 class="card-title"> <a href= ${link} target='_blank' rel='noopener noreferrer'> ${name}</a> </h5>
+
       <p class="card-text">${desc}</p>
-      <p class="card-text"> ${link} </p>
+
+      <p class="card-title"> <a href= ${link} target='_blank' rel='noopener noreferrer'> Click here to learn more </a> </p>
     </div>
     `
+
   );
 
 
@@ -503,8 +528,52 @@ map.flyTo({
   // listen for clicks on the flyto buttons
   $('.flyto').on('click', function() {
 
+    if ($(this).hasClass('flyto-broad')) {
 
-    if ($(this).hasClass('flyto-minetta')) {
+
+        currentFeature = locations.features.find(
+          function(feature) {
+            return feature.properties.id === 'broad'
+          });
+
+        flyToDisplayStoryFromButton(currentFeature);
+    }
+
+    else if ($(this).hasClass('flyto-maiden')) {
+
+
+        currentFeature = locations.features.find(
+          function(feature) {
+            return feature.properties.id === 'maiden'
+          });
+
+        flyToDisplayStoryFromButton(currentFeature);
+    }
+
+    else if ($(this).hasClass('flyto-collect')) {
+
+
+        currentFeature = locations.features.find(
+          function(feature) {
+            return feature.properties.id === 'collect'
+          });
+
+        flyToDisplayStoryFromButton(currentFeature);
+    }
+
+    else if ($(this).hasClass('flyto-montayne')) {
+
+
+        currentFeature = locations.features.find(
+          function(feature) {
+            return feature.properties.id === 'montayne'
+          });
+
+        flyToDisplayStoryFromButton(currentFeature);
+    }
+
+
+    else if ($(this).hasClass('flyto-minetta')) {
 
 
         currentFeature = locations.features.find(
@@ -520,10 +589,16 @@ map.flyTo({
         // var dummyFeatureCollection=[currentFeature];
 
         // console.log(dummyFeatureCollection);
+        flyToDisplayStoryFromButton(currentFeature);
+    }
 
-      flyToDisplayStoryFromButton(currentFeature);
+    else if ($(this).hasClass('flyto-tibbetts')) {
 
-      // newCenter = [-73.9101635,40.8822333]
+
+        currentFeature = locations.features.find(
+          function(feature) {
+            return feature.properties.id === 'tibbetts'
+          });
 
       map.setLayoutProperty(
         'CSOs',
@@ -536,19 +611,195 @@ map.flyTo({
         'visibility',
         'visible'
       );
+
+      map.setLayoutProperty(
+        'putnam_greenway',
+        'visibility',
+        'visible'
+      );
+
+      flyToDisplayStoryFromButton(currentFeature);
+
+      map.flyTo({
+        center: currentFeature.geometry.coordinates,
+        zoom: 13
+      });
     }
 
+    else if ($(this).hasClass('flyto-newtown')) {
 
-    if ($(this).hasClass('flyto-gowanus')) {
-      newCenter = [-73.941626,40.840029]
+
+        currentFeature = locations.features.find(
+          function(feature) {
+            return feature.properties.id === 'newtown'
+          });
+
+      map.setLayoutProperty(
+        'CSOs',
+        'visibility',
+        'visible'
+      );
+
+      flyToDisplayStoryFromButton(currentFeature);
+
+      map.flyTo({
+        center: currentFeature.geometry.coordinates,
+        zoom: 13
+      });
     }
 
-    // map.flyTo({
-    //   center: newCenter,
-    //   zoom: 13
-    // })
 
   });
+
+  map.on('click', 'markers', function(e) {
+
+    flyToDisplayStoryFromMarker(e);
+
+    if(e.features[0].properties.id==='tibbetts'){
+
+      map.setLayoutProperty(
+        'CSOs',
+        'visibility',
+        'visible'
+      );
+
+      map.setLayoutProperty(
+        'sewer',
+        'visibility',
+        'visible'
+      );
+
+      map.setLayoutProperty(
+        'putnam_greenway',
+        'visibility',
+        'visible'
+      );
+
+      map.flyTo({
+        center: e.lngLat,
+        zoom: 13
+      });
+
+    } else if (e.features[0].properties.id==='newtown') {
+      map.setLayoutProperty(
+        'CSOs',
+        'visibility',
+        'visible'
+      );
+
+      map.flyTo({
+        center: e.lngLat,
+        zoom: 13
+      });
+
+    } else{
+      return;
+    };
+
+  });
+
+  // when marker is hovered on, display popup
+
+  map.on('mouseenter', 'markers', function(e) {
+
+    map.getCanvas().style.cursor = 'pointer';
+
+    createPopUp(e);
+
+
+  });
+
+  // listen for hvering  on the flyto buttons
+  $('.flyto').on('mouseenter', function() {
+
+    if ($(this).hasClass('flyto-broad')) {
+
+
+        currentFeature = locations.features.find(
+          function(feature) {
+            return feature.properties.id === 'broad'
+          });
+
+        createPopUpButton(currentFeature);
+    }
+
+    else if ($(this).hasClass('flyto-maiden')) {
+
+
+        currentFeature = locations.features.find(
+          function(feature) {
+            return feature.properties.id === 'maiden'
+          });
+
+        createPopUpButton(currentFeature);
+    }
+
+    else if ($(this).hasClass('flyto-collect')) {
+
+
+        currentFeature = locations.features.find(
+          function(feature) {
+            return feature.properties.id === 'collect'
+          });
+
+        createPopUpButton(currentFeature);
+    }
+
+    else if ($(this).hasClass('flyto-montayne')) {
+
+
+        currentFeature = locations.features.find(
+          function(feature) {
+            return feature.properties.id === 'montayne'
+          });
+
+        createPopUpButton(currentFeature);
+    }
+
+
+    else if ($(this).hasClass('flyto-minetta')) {
+
+
+        currentFeature = locations.features.find(
+          function(feature) {
+            return feature.properties.id === 'minetta'
+          });
+
+        createPopUpButton(currentFeature);
+    }
+
+    else if ($(this).hasClass('flyto-tibbetts')) {
+
+
+        currentFeature = locations.features.find(
+          function(feature) {
+            return feature.properties.id === 'tibbetts'
+          });
+
+      createPopUpButton(currentFeature);
+
+    }
+
+    else if ($(this).hasClass('flyto-newtown')) {
+
+
+        currentFeature = locations.features.find(
+          function(feature) {
+            return feature.properties.id === 'newtown'
+          });
+
+      createPopUpButton(currentFeature);
+
+    }
+
+
+  });
+
+  //remove popup when no longer hoveing on fly-to buttons
+    $('.flyto').on('mouseleave', function() {
+      const popUps = document.getElementsByClassName('mapboxgl-popup');
+      if (popUps[0]) popUps[0].remove();
+      });
 
 // Change it back to a pointer when it leaves.
   map.on('mouseleave', 'sewer', function(e) {
