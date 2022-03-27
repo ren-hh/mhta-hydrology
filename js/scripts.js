@@ -616,6 +616,17 @@ map.flyTo({
         flyToDisplayStoryFromButton(currentFeature);
     }
 
+    else if ($(this).hasClass('flyto-sunfish')) {
+
+
+        currentFeature = locations.features.find(
+          function(feature) {
+            return feature.properties.id === 'sunfish'
+          });
+
+        flyToDisplayStoryFromButton(currentFeature);
+    }
+
     else if ($(this).hasClass('flyto-minetta')) {
 
 
@@ -877,6 +888,18 @@ map.flyTo({
         currentFeature = locations.features.find(
           function(feature) {
             return feature.properties.id === 'tiemann'
+          });
+
+      createPopUpButton(currentFeature);
+
+    }
+
+    else if ($(this).hasClass('flyto-sunfish')) {
+
+
+        currentFeature = locations.features.find(
+          function(feature) {
+            return feature.properties.id === 'sunfish'
           });
 
       createPopUpButton(currentFeature);

@@ -177,7 +177,7 @@
         "id": "brook",
         "name": "Mill Brook",
         "image1": "https://farm4.static.flickr.com/3413/3295763206_c7ce4308d3_m.jpg",
-        "image2": "http://radio.nymoon.com/visual/rewiring/09_BrookPark_0599.jpg",
+        "image2": "./images/brook_now.png",
         "link": "https://www.friendsofbrookpark.org/brook-park/brook-daylighting/ ",
         "link2": "http://radio.nymoon.com/rewiringthecity/",
         "description": "Brook Park was created in 1979 from a series of vacant lots acquired by the city as a part of the South Bronx Neighborhood Open Space Development Project, and today the space houses a vibrant community garden, overseen by the Friends of Brook Park (FoBP). When their own research turned up evidence that the brook had flowed just west of their garden, FoBP developed their own plan in partnership with the Gaia Institute to bring a small portion of the Mill Brook back to life. The Brook Restoration project includes planning a wetland system in the Mott Haven neighborhood of the South Bronx with native plantings to support fauna, similar to the natural brook that ran through the park in the late 1800’s. Rainwater harvesting from adjacent buildings would divert 1,000,000 gallons of water a year from the combined-sewer to an above ground cistern for irrigation, and below-grade cisterns used to maintain water levels in the wetland. A comprehensive ecosystem assessment will be used to determine native plantings and diverse species habitat. Community involvement and stewardship will ensure the success of the project over the long-term. The study was funded through the National Oceanic and Atmospheric Administration (NOAA) South Bronx Waterfront Partnership and managed by the Wildlife Conservation Society (WCS).  "
@@ -191,7 +191,7 @@
       }
 
     },
-    
+
     {
       "type": "Feature",
       "properties": {
@@ -208,6 +208,27 @@
         "coordinates": [
           -73.95921238057957,
           40.815557705476934
+        ]
+      }
+
+    },
+
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "sunfish",
+        "name": "Sunfish Creek",
+        "image1": "./images/sunfish_then.png",
+        "image2": "./images/empire_state.png",
+        "link": "https://lostriversnyc.blogspot.com/search/label/Water%3A%20Sunfish%20Creek",
+        "link2": "https://www.nytimes.com/2008/01/06/nyregion/thecity/06fyi.html",
+        "description": "Sunfish Creek originates around Times Square and empties into the East River at Kips Bay at E 34th St. The stream still runs below the basement of the Empire State building. High-water marks made by workers in the building’s sub-basement show that the stream beneath it has risen as high as six feet in the spring, after a snowy winter. The stream proved a headache for the engineers of the Pennsylvania Railroad tunnels, and for the builders of the old Waldorf-Astoria Hotel on the site of the Empire State Building. It is one of many underground streams in Manhattan that builders still have to reckon with. "
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.98535418397812,
+          40.748225281708905
         ]
       }
 
