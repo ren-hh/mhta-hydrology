@@ -134,6 +134,17 @@ a:link, a:visited {
   color: white;
 }
 
+#modal a:link {
+  /* background-color: #ccc; */
+  color: black;
+}
+
+#modal a:visited {
+  color: blue;
+}
+
+
+
 
 /* mouse over link */
 /* a:hover {
