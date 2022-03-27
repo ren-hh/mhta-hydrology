@@ -406,7 +406,7 @@ var locations= $.getJSON('data/markers.geojson', function(locations) {
 
   map.flyTo({
     center: coordinates,
-    zoom: 15
+    zoom: 14.5
   });
 
 
@@ -459,7 +459,7 @@ function flyToDisplayStoryFromMarker(currentFeature) {
 
 map.flyTo({
   center: coordinates,
-  zoom: 15
+  zoom: 14.5
 });
 
 
@@ -572,6 +572,16 @@ map.flyTo({
         flyToDisplayStoryFromButton(currentFeature);
     }
 
+    else if ($(this).hasClass('flyto-east')) {
+
+
+        currentFeature = locations.features.find(
+          function(feature) {
+            return feature.properties.id === 'east'
+          });
+
+        flyToDisplayStoryFromButton(currentFeature);
+    }
 
     else if ($(this).hasClass('flyto-minetta')) {
 
@@ -786,6 +796,18 @@ map.flyTo({
         currentFeature = locations.features.find(
           function(feature) {
             return feature.properties.id === 'newtown'
+          });
+
+      createPopUpButton(currentFeature);
+
+    }
+
+    else if ($(this).hasClass('flyto-east')) {
+
+
+        currentFeature = locations.features.find(
+          function(feature) {
+            return feature.properties.id === 'east'
           });
 
       createPopUpButton(currentFeature);

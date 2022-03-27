@@ -84,7 +84,7 @@
         "image1": "https://watercourses.typepad.com/photos/uncategorized/2008/08/15/106thst_crop_abig_viele_2.jpg",
         "image2": "https://live.staticflickr.com/3501/3237281069_30397969e0_b.jpg",
         "link": "https://watercourses.typepad.com/watercourses/manhattan_north_of_96th_st/",
-        "description":"A very wide stream ran into the East River between 106th Street and 107th Street. One source came from the west side of Manhattan, where Columbia University's campus sits today.This brook was long known as Montanye's Rivulet, and, in the development of Central Park, was used to feed the Pool, the Loch, and Harlem Lake. Montanye's Rivulet apparently still exists and still feeds the Harlem Lake at least. "
+        "description":"A very wide stream ran into the East River between 106th Street and 107th Street. One source came from the west side of Manhattan, where Columbia University's campus sits today.This brook was long known as Montanye's Rivulet, and, in the development of Central Park, was used to feed the Pool, the Loch, and Harlem Meer. Montanye's Rivulet apparently still exists and still feeds the Harlem Meer. "
       },
       "geometry": {
         "type": "Point",
@@ -129,6 +129,44 @@
         "coordinates": [
           -73.93463428093632,
           40.72925247191888
+        ]
+      }
+
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "east",
+        "name": "East River Park",
+        "image1": "./images/LES_then.png",
+        "image2": "http://d3e1m60ptf1oym.cloudfront.net/6239246c-0925-11e0-acdd-f386d1521aaf/1372400155_xgaplus.jpg",
+        "link": "https://www1.nyc.gov/site/escr/index.page",
+        "description":"The East Side Coastal Resiliency (ESCR) Project is a coastal protection initiative, jointly funded by the City of New York and the federal government, aimed at reducing flood risk due to coastal storms and sea level rise on Manhattan's East Side from East 25th Street to Montgomery Street. When looking at the historical landscape of the neighborhoods that ESCR aims to protect from flooding and sea level rise, it becomes instantly obvious why such a program is needed. The entire Lower East Side used to be low-lying marshland. The marshes and streams were drained and filled. East River Park, which experienced bad flooding during Hurricane Sandy and is being elevated 8 feet as part of ESCR, is entirely built on what used to be water."
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.97421198926301,
+          40.7181322676814
+        ]
+      }
+
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "west",
+        "name": "32 W 76th St.",
+        "image1": "./images/32_W_76_then.png",
+        "image2": "./images/32_W_76.png",
+        "link": "https://www.nytimes.com/2015/11/22/nyregion/manhattan-upper-west-side-building-dispute-about-subterranean-stream.html",
+        "description":"An ongoing real estate batte on the Upper West Side is caused by a subterranean stream. The owners of a recently purchased $10 million townhouse at 32 W 76th St. are running into problems with their planned renovations due to the stream having weakened the structural integrity of the building. A neighbor warned that during a street dig in 2001, sewer workers hit running water that he believed was the stream 22 feet down. The stream, he said, had eroded the soil, causing cave-ins over the years."
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.97576244395047,
+          40.77927834312221
         ]
       }
 
