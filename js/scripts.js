@@ -583,6 +583,39 @@ map.flyTo({
         flyToDisplayStoryFromButton(currentFeature);
     }
 
+    else if ($(this).hasClass('flyto-west')) {
+
+
+        currentFeature = locations.features.find(
+          function(feature) {
+            return feature.properties.id === 'west'
+          });
+
+        flyToDisplayStoryFromButton(currentFeature);
+    }
+
+    else if ($(this).hasClass('flyto-brook')) {
+
+
+        currentFeature = locations.features.find(
+          function(feature) {
+            return feature.properties.id === 'brook'
+          });
+
+        flyToDisplayStoryFromButton(currentFeature);
+    }
+
+    else if ($(this).hasClass('flyto-tiemann')) {
+
+
+        currentFeature = locations.features.find(
+          function(feature) {
+            return feature.properties.id === 'tiemann'
+          });
+
+        flyToDisplayStoryFromButton(currentFeature);
+    }
+
     else if ($(this).hasClass('flyto-minetta')) {
 
 
@@ -813,6 +846,43 @@ map.flyTo({
       createPopUpButton(currentFeature);
 
     }
+
+    else if ($(this).hasClass('flyto-west')) {
+
+
+        currentFeature = locations.features.find(
+          function(feature) {
+            return feature.properties.id === 'west'
+          });
+
+      createPopUpButton(currentFeature);
+
+    }
+
+    else if ($(this).hasClass('flyto-brook')) {
+
+
+        currentFeature = locations.features.find(
+          function(feature) {
+            return feature.properties.id === 'brook'
+          });
+
+      createPopUpButton(currentFeature);
+
+    }
+
+    else if ($(this).hasClass('flyto-tiemann')) {
+
+
+        currentFeature = locations.features.find(
+          function(feature) {
+            return feature.properties.id === 'tiemann'
+          });
+
+      createPopUpButton(currentFeature);
+
+    }
+
 
 
   });
