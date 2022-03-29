@@ -90,8 +90,10 @@ var locations= $.getJSON('data/markers.geojson', function(locations) {
         'visibility': 'visible'
       },
       paint: {
-        'line-color': '#252a00',
-        'line-width': 3
+        'line-color': '#5F6162',
+        'line-width': 2,
+        'line-opacity': 1
+
 
       }
     });
@@ -110,8 +112,8 @@ var locations= $.getJSON('data/markers.geojson', function(locations) {
         'visibility': 'visible'
       },
       paint: {
-        'line-color': '#252a00',
-        'line-width': 3
+        'line-color': '#5F6162',
+        'line-width': 2
 
       }
     });
@@ -213,8 +215,9 @@ var locations= $.getJSON('data/markers.geojson', function(locations) {
 
 
 // add markers layer
+
     map.loadImage(
-      './images/mapbox-marker-icon-20px-gray.png',
+      './images/mapbox-marker-icon-20px-pink.png',
       // <i class="fa-solid fa-location-pin"></i>,
 
       (error, image) => {
@@ -250,6 +253,19 @@ var locations= $.getJSON('data/markers.geojson', function(locations) {
 
   });
 
+  // console.log(locations)
+  // locations.forEach(function(location) {
+  //
+  //   var color = 'purple'
+
+
+  //   new mapboxgl.Marker({
+  //   color: 'purple'
+  // })
+  //   .setLngLat(locations.features[i].geometry.coordinates)
+  //   .addTo(map);
+
+  // });
 
 
 // create pop up when hovering over  sewer,  CSO, streams, markers
@@ -372,6 +388,7 @@ var locations= $.getJSON('data/markers.geojson', function(locations) {
 
     $('#default-sidebar-content').hide();
     $("#variable-sidebar-content").show();
+    $(".sidebar-bottom").show();
 
     $("#item1").html(
 
@@ -396,7 +413,7 @@ var locations= $.getJSON('data/markers.geojson', function(locations) {
         <h5 class="card-title"> <a href= ${link} target='_blank' rel='noopener noreferrer'> ${name}</a> </h5>
 
         <p class="card-text">${desc}</p>
-            <p class="card-title"> <a href= ${link} target='_blank' rel='noopener noreferrer'> Click here to learn more </a> </p>
+            <p class="card-title"> <a href= ${link} target='_blank' rel='noopener noreferrer'> Learn more </a> </p>
       </div>
       `
 
@@ -424,6 +441,7 @@ function flyToDisplayStoryFromMarker(currentFeature) {
 
   $('#default-sidebar-content').hide();
   $("#variable-sidebar-content").show();
+  $(".sidebar-bottom").show();
 
   $("#item1").html(
 
@@ -979,13 +997,12 @@ map.flyTo({
       if(id==='100flood'){
         link.textContent='100 year floodplain';
         link.className='active';
-      } else {
+      } else if (id==='500flood') {
         link.textContent='500 year floodplain';
         link.className = 'none';
+      } else {
+        return;
       }
-      // else{
-      //   link.textContent='Pre-development shoreline (1609)';
-      // }
 
 
 
@@ -1030,6 +1047,7 @@ $('.reset').on('click', function() {
 
   $('#default-sidebar-content').show();
   $("#variable-sidebar-content").hide();
+  $(".sidebar-bottom").hide();
 
   map.setLayoutProperty(
     'CSOs',
@@ -1066,6 +1084,8 @@ $(document).ready(function () {
 
 //hide card/carousel upon loading
   $("#variable-sidebar-content").hide();
+
+  $(".sidebar-bottom").hide();
 });
 
 // var myCarousel = document.querySelector('#myCarousel')

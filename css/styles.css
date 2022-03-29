@@ -61,9 +61,11 @@ margin-bottom: 25px;
   text-align: center;
 }
 
-.btn-area {
-  text-align: center;
-}
+/* .btn-area {
+  /* text-align: center; */
+  /* align-items: left;
+
+} */
 
 #mapContainer {
   backgroundColor: #ccc;
@@ -72,6 +74,7 @@ margin-bottom: 25px;
 
 .reset {
   margin-bottom: 25px;
+  background-color: #33485d;
 }
 
 .reset:hover {
@@ -90,6 +93,7 @@ margin-bottom: 25px;
 .btn-outline-primary {
   color: #FFF;
   border-color: #FFF;
+  border-radius: 10px;
 }
 
 .btn-outline-primary:hover {
@@ -99,9 +103,19 @@ margin-bottom: 25px;
 }
 
 .flyto{
-  width: 110px;
+  width: 100px;
   height: 60px;
   font-size: 14px;
+  margin: 10px;
+  background-color: #33485d;
+
+
+}
+
+.btn-group{
+
+  align: left;
+
 }
 
 .highlight{
@@ -193,7 +207,7 @@ a:link, a:visited {
 
 #menu {
   background: #fff;
-  opacity: 0.8;
+  opacity: 1;
   position: absolute;
   z-index: 1;
   top: 60px;
