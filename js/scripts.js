@@ -467,7 +467,7 @@ function flyToDisplayStoryFromMarker(currentFeature) {
 
       <p class="card-text">${desc}</p>
 
-      <p class="card-title"> <a href= ${link} target='_blank' rel='noopener noreferrer'> Click here to learn more </a> </p>
+      <p class="card-title"> <a href= ${link} target='_blank' rel='noopener noreferrer'> Learn more </a> </p>
     </div>
     `
 
