@@ -1,25 +1,27 @@
 
-  mapboxgl.accessToken = 'pk.eyJ1IjoicmVuLWhlZ3lpIiwiYSI6ImNremhudTF1eTJjMW0yd2t1NTUzYjN4bmIifQ.IiIyBmQ93k7PgPh0rQrLEg'
+//personal access token for mapboxgl
+mapboxgl.accessToken = 'pk.eyJ1IjoicmVuLWhlZ3lpIiwiYSI6ImNremhudTF1eTJjMW0yd2t1NTUzYjN4bmIifQ.IiIyBmQ93k7PgPh0rQrLEg'
 
-  var nycBounds = [[-74.333496,40.469935], [-73.653717,40.932190]]
-  var mapCenter = [-73.9567938, 40.8007976]
+//map parameters
+var nycBounds = [[-74.333496,40.469935], [-73.653717,40.932190]]
+var mapCenter = [-73.9567938, 40.8007976]
 
-  var map = new mapboxgl.Map({
-    container: 'mapContainer', // HTML container id
-    style: 'mapbox://styles/mapbox/light-v9', // style URL
-    center: mapCenter, // starting position as [lng, lat]
-    maxBounds: nycBounds,
-    zoom: 11,
-    // minZoom: 9,
-    // maxZoom: 14
-  });
+//create map
+var map = new mapboxgl.Map({
+container: 'mapContainer', // HTML container id
+style: 'mapbox://styles/mapbox/light-v9', // style URL
+center: mapCenter, // starting position as [lng, lat]
+maxBounds: nycBounds,
+zoom: 11,
+// minZoom: 9,
+// maxZoom: 14
+});
 
 
-//get markers geojson as a variable
-
+//get markers geojson as a variable. must include all code in {} to be able to call  the variable later
 var locations= $.getJSON('data/markers.geojson', function(locations) {
 
-// load data and add layers
+  // load data and add layers
   map.on("load", function () {
 
     map.addSource('500yr-floodplain', {
@@ -253,22 +255,9 @@ var locations= $.getJSON('data/markers.geojson', function(locations) {
 
   });
 
-  // console.log(locations)
-  // locations.forEach(function(location) {
-  //
-  //   var color = 'purple'
 
+  // create pop up when hovering over  sewer,  greenway, CSO toggleableLayers
 
-  //   new mapboxgl.Marker({
-  //   color: 'purple'
-  // })
-  //   .setLngLat(locations.features[i].geometry.coordinates)
-  //   .addTo(map);
-
-  // });
-
-
-// create pop up when hovering over  sewer,  CSO, streams, markers
   map.on('mouseenter', 'sewer', function(e) {
     map.getCanvas().style.cursor = 'pointer';
 
@@ -336,7 +325,8 @@ var locations= $.getJSON('data/markers.geojson', function(locations) {
   });
 
 
-//create a popup function for  hovering on markers
+  //create a popup function for  hovering on markers
+  //code inspiration: https://docs.mapbox.com/help/tutorials/building-a-store-locator/
   function createPopUp(currentFeature) {
 
     const popUps = document.getElementsByClassName('mapboxgl-popup');
@@ -356,8 +346,8 @@ var locations= $.getJSON('data/markers.geojson', function(locations) {
           .addTo(map);
     };
 
-//create popup when hovering over button
-    function createPopUpButton(currentFeature) {
+  //create popup when hovering over button
+  function createPopUpButton(currentFeature) {
 
       const popUps = document.getElementsByClassName('mapboxgl-popup');
   /** Check if there is already a popup on the map and if so, remove it */
@@ -376,7 +366,7 @@ var locations= $.getJSON('data/markers.geojson', function(locations) {
             .addTo(map);
       };
 
-//flyTo and cahnge Navbar text function
+  //flyTo and change Navbar text function when button is clicked
   function flyToDisplayStoryFromButton(currentFeature) {
 
     const coordinates = currentFeature.geometry.coordinates;
@@ -429,66 +419,66 @@ var locations= $.getJSON('data/markers.geojson', function(locations) {
 
 };
 
+  //flyTo and change Navbar text function when marker is clicked
+  function flyToDisplayStoryFromMarker(currentFeature) {
 
-function flyToDisplayStoryFromMarker(currentFeature) {
+    const coordinates = currentFeature.lngLat;
+    const name = currentFeature.features[0].properties.name;
+    const desc = currentFeature.features[0].properties.description;
+    const photo1 = currentFeature.features[0].properties.image1;
+    const photo2 = currentFeature.features[0].properties.image2;
+    const link = currentFeature.features[0].properties.link;
 
-  const coordinates = currentFeature.lngLat;
-  const name = currentFeature.features[0].properties.name;
-  const desc = currentFeature.features[0].properties.description;
-  const photo1 = currentFeature.features[0].properties.image1;
-  const photo2 = currentFeature.features[0].properties.image2;
-  const link = currentFeature.features[0].properties.link;
+    $('#default-sidebar-content').hide();
+    $("#variable-sidebar-content").show();
+    $(".sidebar-bottom").show();
 
-  $('#default-sidebar-content').hide();
-  $("#variable-sidebar-content").show();
-  $(".sidebar-bottom").show();
+    $("#item1").html(
 
-  $("#item1").html(
+      `
+        <img src= "${photo1}" class="d-block w-100" alt="...">
 
-    `
-      <img src= "${photo1}" class="d-block w-100" alt="...">
+      `
+    );
 
-    `
-  );
+    $("#item2").html(
 
-  $("#item2").html(
+      `
+        <img src= "${photo2}" class="d-block w-100" alt="...">
 
-    `
-      <img src= "${photo2}" class="d-block w-100" alt="...">
+      `
+    );
 
-    `
-  );
+    $('.card-body').html(
 
-  $('.card-body').html(
+      `
+      <div class="card-body">
+        <h5 class="card-title"> <a href= ${link} target='_blank' rel='noopener noreferrer'> ${name}</a> </h5>
 
-    `
-    <div class="card-body">
-      <h5 class="card-title"> <a href= ${link} target='_blank' rel='noopener noreferrer'> ${name}</a> </h5>
+        <p class="card-text">${desc}</p>
 
-      <p class="card-text">${desc}</p>
+        <p class="card-title"> <a href= ${link} target='_blank' rel='noopener noreferrer'> Learn more </a> </p>
+      </div>
+      `
 
-      <p class="card-title"> <a href= ${link} target='_blank' rel='noopener noreferrer'> Learn more </a> </p>
-    </div>
-    `
-
-  );
+    );
 
 
 
-map.flyTo({
-  center: coordinates,
-  zoom: 14.5
-});
+  map.flyTo({
+    center: coordinates,
+    zoom: 14.5
+  });
 
 
 };
 
-//when marker is clicked, have navbar text Change and zoom to the location
-
+  //call flyTo and change Navbar text function when marker is clicked
   map.on('click', 'markers', function(e) {
 
     flyToDisplayStoryFromMarker(e);
 
+//turn on/off relevant layers
     if(e.features[0].properties.id==='tibbetts'){
 
       map.setLayoutProperty(
@@ -527,25 +517,41 @@ map.flyTo({
       });
 
     } else{
+      map.setLayoutProperty(
+        'CSOs',
+        'visibility',
+        'none'
+      );
+
+      map.setLayoutProperty(
+        'sewer',
+        'visibility',
+        'none'
+      );
+
+      map.setLayoutProperty(
+        'putnam_greenway',
+        'visibility',
+        'none'
+      );
       return;
     };
 
   });
 
-  // when marker is hovered on, display popup
-
+  // call display popup function when marker is hovered on
   map.on('mouseenter', 'markers', function(e) {
 
     map.getCanvas().style.cursor = 'pointer';
 
     createPopUp(e);
 
-
   });
 
-  // listen for clicks on the flyto buttons
+  //call flyTo and change Navbar text function when button is clicked
   $('.flyto').on('click', function() {
 
+    //give an id to each button that links it to a feature in the markers layer, and pull the associated feature
     if ($(this).hasClass('flyto-broad')) {
 
 
@@ -647,20 +653,11 @@ map.flyTo({
 
     else if ($(this).hasClass('flyto-minetta')) {
 
-
         currentFeature = locations.features.find(
           function(feature) {
             return feature.properties.id === 'minetta'
           });
 
-        console.log(locations.features[0].geometry.coordinates);
-
-        console.log(currentFeature);
-        console.log(currentFeature[0]);
-
-        // var dummyFeatureCollection=[currentFeature];
-
-        // console.log(dummyFeatureCollection);
         flyToDisplayStoryFromButton(currentFeature);
     }
 
@@ -723,65 +720,7 @@ map.flyTo({
 
   });
 
-  map.on('click', 'markers', function(e) {
-
-    flyToDisplayStoryFromMarker(e);
-
-    if(e.features[0].properties.id==='tibbetts'){
-
-      map.setLayoutProperty(
-        'CSOs',
-        'visibility',
-        'visible'
-      );
-
-      map.setLayoutProperty(
-        'sewer',
-        'visibility',
-        'visible'
-      );
-
-      map.setLayoutProperty(
-        'putnam_greenway',
-        'visibility',
-        'visible'
-      );
-
-      map.flyTo({
-        center: e.lngLat,
-        zoom: 13
-      });
-
-    } else if (e.features[0].properties.id==='newtown') {
-      map.setLayoutProperty(
-        'CSOs',
-        'visibility',
-        'visible'
-      );
-
-      map.flyTo({
-        center: e.lngLat,
-        zoom: 13
-      });
-
-    } else{
-      return;
-    };
-
-  });
-
-  // when marker is hovered on, display popup
-
-  map.on('mouseenter', 'markers', function(e) {
-
-    map.getCanvas().style.cursor = 'pointer';
-
-    createPopUp(e);
-
-
-  });
-
-  // listen for hvering  on the flyto buttons
+  // display popup when hovering on a button
   $('.flyto').on('mouseenter', function() {
 
     if ($(this).hasClass('flyto-broad')) {
@@ -924,17 +863,15 @@ map.flyTo({
 
     }
 
-
-
   });
 
   //remove popup when no longer hoveing on fly-to buttons
-    $('.flyto').on('mouseleave', function() {
-      const popUps = document.getElementsByClassName('mapboxgl-popup');
-      if (popUps[0]) popUps[0].remove();
-      });
+  $('.flyto').on('mouseleave', function() {
+    const popUps = document.getElementsByClassName('mapboxgl-popup');
+    if (popUps[0]) popUps[0].remove();
+    });
 
-// Change it back to a pointer when it leaves.
+// Cremove popup and change cursor back to hand when it leaves a layer
   map.on('mouseleave', 'sewer', function(e) {
     map.getCanvas().style.cursor = '';
     /** remove popups */
@@ -942,8 +879,6 @@ map.flyTo({
   if (popUps[0]) popUps[0].remove();
   });
 
-
-// Change it back to a pointer when it leaves.
   map.on('mouseleave', 'CSOs', function(e) {
     map.getCanvas().style.cursor = '';
     /** remove popups */
@@ -951,7 +886,6 @@ map.flyTo({
   if (popUps[0]) popUps[0].remove();
   });
 
-  // Change it back to a pointer when it leaves.
   map.on('mouseleave', 'putnam_greenway', function(e) {
     map.getCanvas().style.cursor = '';
     /** remove popups */
@@ -959,8 +893,6 @@ map.flyTo({
   if (popUps[0]) popUps[0].remove();
   });
 
-
-// Change it back to a pointer when it leaves.
   map.on('mouseleave', 'markers', function(e) {
     map.getCanvas().style.cursor = '';
 
@@ -1038,7 +970,7 @@ map.flyTo({
 
 
 
-// listen for click on the 'Back to City View' button
+// listen for click on the 'Back to City View' button and hide/show content as appropriate
 $('.reset').on('click', function() {
   map.flyTo({
     center: mapCenter,
@@ -1070,11 +1002,10 @@ $('.reset').on('click', function() {
 
 
 
-//when the documents loads
-
+//when the documents loads, hide/show appropriate content
 $(document).ready(function () {
 
-//set carousel properties
+  //set carousel properties
   $("#myCarousel").carousel({
 
      interval: 4000,
@@ -1084,54 +1015,8 @@ $(document).ready(function () {
 
 //hide card/carousel upon loading
   $("#variable-sidebar-content").hide();
-
   $(".sidebar-bottom").hide();
+
 });
 
-// var myCarousel = document.querySelector('#myCarousel')
-// var carousel = new bootstrap.Carousel(myCarousel, {
-//   interval: 2000,
-//   wrap: false,
-//   pause: true
-//
-// });
-
-
-
-
-//legend
-
-//define layer names for legend
-// const layers = [
-//
-// 'Sanitation Fleet',
-// 'School Bus Fleet',
-// 'Other Fleet',
-// 'Substation'
-// ];
-// const colors = [
-// '#19601B',
-// '#FFD800',
-// 'purple',
-// '#38A1B8'
-// ];
-//
-// // create legend. Source: https://docs.mapbox.com/help/tutorials/choropleth-studio-gl-pt-2/#add-a-legend
-// const legend = document.getElementById('legend');
-//
-// layers.forEach((layer, i) => {
-//   const color = colors[i];
-//   const item = document.createElement('div');
-//   const key = document.createElement('span');
-//   key.className = 'legend-key';
-//   key.style.backgroundColor = color;
-//
-//   const value = document.createElement('span');
-//   value.innerHTML = `${layer}`;
-//   item.appendChild(key);
-//   item.appendChild(value);
-//   legend.appendChild(item);
-// });
-
-//end of getJSON
 });

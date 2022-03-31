@@ -11,15 +11,15 @@
   <link rel="shortcut icon" href="./images/favicon.ico">
 
   <!-- CSS for google fonts, bootstrap, mapboxgl, mapboxgl geocoder, plus local styles-->
- <link rel="preconnect" href="https://fonts.googleapis.com">
- <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
- <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+   <link rel="preconnect" href="https://fonts.googleapis.com">
+   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+   <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
- <link href='https://api.mapbox.com/mapbox-gl-js/v2.7.0/mapbox-gl.css' rel='stylesheet' />
- <link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.2/mapbox-gl-geocoder.css" type="text/css">
- <link rel="stylesheet" href="css/styles.css">
+   <link href='https://api.mapbox.com/mapbox-gl-js/v2.7.0/mapbox-gl.css' rel='stylesheet' />
+   <link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.2/mapbox-gl-geocoder.css" type="text/css">
+   <link rel="stylesheet" href="css/styles.css">
 
 
 </head>
@@ -62,19 +62,23 @@
    </div>
    <!-- Container wrapper -->
  </nav>
- <!-- Navbar -->
 
+
+<!-- content area -->
   <div class='content-area'>
      <div class='sidebar'>
+
        <div class='sidebar-top'>
+
          <div id='default-sidebar-content'>
            <h3> Ghost Waters of NYC</h3>
-           <p> <small> The map shows  <span class='highlight'> streams </span> that criscrossed parts of New York City in the year 1609 along with the  <span class='highlight'> shoreline </span>  at the time.  Though most creeks and streams are no longer visible on the surface, many continue to course through subway tunnels, basements, and deep under streets and buildings. </small> </p>
+           <p> <small> The map shows  <span class='highlight'> streams </span> that criscrossed parts of New York City in the year 1609 along with the  <span class='highlight'> shoreline </span>  at the time.  Though most creeks and streams are no longer visible on the surface, many continue to course through subway tunnels, basements, and deep under streets and buildings. They <a href= "https://www.nytimes.com/2021/09/28/opinion/hurricane-ida-new-york-city.html" target='_blank' rel='noopener noreferrer' > make their presence known during storm events </a> and cause unpleasant surprises for construction crews, haunting us for having buried them alive.  </small> </p>
            <p> <small>  <span class='highlight'> Toggle </span>  the layers for the 100 year and 500 year  FEMA <span class='highlight'> flood </span> maps  to see how much the original geography of the island impacts where flood hazards are expected today. <a href= "https://www.massivecert.com/blog/fema-100-year-flood-zone-explained" target='_blank' rel='noopener noreferrer' > Learn</a>  about what 100 year and 500 year floodplain means. </small> </p>
            <p> <small> <span class='highlight'> Click </span> the buttons or markers on the map to learn about a particular stream, its history, and how it continues to impact the lives of New Yorkers today. Some stories have additional features that you can hover over to get more information. </small> </p>
 
+           <!-- buttons area -->
            <div class='btn-area'>
-            <!-- <h5>Jump to a Story</h5> -->
+
             <p></p>
             <h4>Bronx</h4>
             <div class="btn-group" role="group" aria-label="button group">
@@ -112,47 +116,47 @@
             <div class="card text-white bg-dark mb-3" style="background-color:#33485d;">
                <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light" style="background-color:#33485d;">
 
-                           <!-- Carousel wrapper -->
-                           <!--source: https://getbootstrap.com/docs/5.1/components/carousel/ -->
-                           <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
-                            <div class="carousel-indicators">
-                              <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                              <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                              <!-- <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button> -->
-                            </div>
-                            <div class="carousel-inner">
-                                <div class="carousel-item active">
-                                  <div id="item1">
-                                    <img src= "..." class="d-block w-100" alt="...">
+                   <!-- Carousel wrapper -->
+                   <!--source: https://getbootstrap.com/docs/5.1/components/carousel/ -->
+                   <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-indicators">
+                      <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                      <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                      <!-- <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button> -->
+                    </div>
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                          <div id="item1">
+                            <img src= "..." class="d-block w-100" alt="...">
 
-                                  </div>
-
-                                  <!-- <div class="carousel-caption carousel-caption-padding-y d-none d-md-block"> -->
-                                  <div class = " carousel-caption carousel-caption-padding-y">
-                                      <h5>Then</h5>
-                                  </div>
-                                </div>
-
-                              <div class="carousel-item">
-                                <div id="item2">
-                                  <img src= "..." class="d-block w-100" alt="...">
-
-                                </div>
-                                <div class="carousel-caption carousel-caption-padding-y">
-                                    <h5>Now</h5>
-                                </div>
-                              </div>
-                            </div>
-                            <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
-                              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                              <span class="visually-hidden">Previous</span>
-                            </button>
-                            <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
-                              <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                              <span class="visually-hidden">Next</span>
-                            </button>
                           </div>
-                     <!-- Carousel wrapper -->
+
+                          <!-- <div class="carousel-caption carousel-caption-padding-y d-none d-md-block"> -->
+                          <div class = " carousel-caption carousel-caption-padding-y">
+                              <h5>Then</h5>
+                          </div>
+                        </div>
+
+                      <div class="carousel-item">
+                        <div id="item2">
+                          <img src= "..." class="d-block w-100" alt="...">
+
+                        </div>
+                        <div class="carousel-caption carousel-caption-padding-y">
+                            <h5>Now</h5>
+                        </div>
+                      </div>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
+                      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                      <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
+                      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                      <span class="visually-hidden">Next</span>
+                    </button>
+                  </div>
+             <!-- Carousel wrapper -->
 
 
                    <a href="#!">
@@ -167,22 +171,14 @@
             </div>
           </div>
         </div>
-      </div>
+       </div>
 
-        <div class='sidebar-bottom'>
+       <div class='sidebar-bottom'>
 
-            <button type="button" class="reset btn btn-outline-primary">Back to City View</button>
-            <!-- <p> <small> Data sources: NYC Open Data, Welikia.org </small>  </p> -->
-        </div>
+          <button type="button" class="reset btn btn-outline-primary">Back to City View</button>
+       </div>
 
-
-       <!-- <div class="alert alert-primary" role="alert">
-         <i class="fa-solid fa-circle-info"></i> You could use an alert like this to call attention to a caveat in the data.
-       </div> -->
-<!-- want to link this article https://www.nytimes.com/2021/09/28/opinion/hurricane-ida-new-york-city.html -->
-
-
-  </div>
+    </div>
 
      <div id='mapContainer'>
      <!-- this is where mapboxGL will insert the map -->
@@ -231,7 +227,6 @@
 
 
    <!-- Add layer toggle -->
-
    <nav id="menu"></nav>
 
 </div>
@@ -241,10 +236,6 @@
  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
  <script src='https://api.mapbox.com/mapbox-gl-js/v2.7.0/mapbox-gl.js'></script>
  <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.2/mapbox-gl-geocoder.min.js"></script>
-
- <!-- <script src=
- "https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js">
-     </script> -->
 
  <script
     src="https://code.jquery.com/jquery-3.6.0.min.js"
